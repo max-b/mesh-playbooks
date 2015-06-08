@@ -1,0 +1,10 @@
+GIT
+  remote: https://github.com/bennojoy/network_interface
+  ref: master
+  sha: 5e28199636d9b3386e4946559334b77ce5e8e35f
+  specs:
+    bennojoy.network_interface (0.0.0)
+
+DEPENDENCIES
+  bennojoy.network_interface (>= 0)
+

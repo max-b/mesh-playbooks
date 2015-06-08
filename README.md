@@ -19,6 +19,11 @@ I'm using a cheap, $5/mo droplet from digital ocean. It's ubuntu 14.04 lts, alth
 work as well. All you have to do is make sure that your ssh pub key is in the authorized_keys file. Ansible *should*
 take care of the rest
 
+## Librarian-Ansible
+I found that using librarian-ansible was a decent way to consume other folks more elaborate playbooks. 
+It is a ruby gem, and the Gemfile is under /ruby, but I'm crossing my fingers that there won't really be a need to 
+tinker with it too much.
+
 # Usage
 
 `ansible all -m ping`

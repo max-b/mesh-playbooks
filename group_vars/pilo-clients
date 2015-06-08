@@ -1,1 +1,1 @@
-controller_mac: "{{CORY_PILO_MAC}}"
+controller_mac: "00:00:00:00:00:01"

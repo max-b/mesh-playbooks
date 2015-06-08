@@ -3,4 +3,5 @@
   roles:
     - switch
     - openvpn_client
+    - librarian_roles/bennojoy.network_interface
 

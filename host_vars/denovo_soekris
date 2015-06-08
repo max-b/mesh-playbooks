@@ -5,8 +5,22 @@ openvpn_server: 104.236.167.80
 ovs_interfaces: "eth2 eth3"
 pilo_client: true
 pilo_controller: false
-br_mac: "{{DENOVO_PILO_MAC}}"
-pilo_addr: "{{DENOVO_PILO_IP}}" + "/" + "{{PILO_BITMASK}}"
-pilo_ip: "{{DENOVO_PILO_IP}}"
-udp_port: "{{UDP_PORT}}"
+br_mac: "00:00:00:00:00:03"
+pilo_addr: "10.1.100.3/16"
+pilo_ip: "10.1.100.3"
 
+network_ether_interfaces:
+ - device: eth3
+   bootproto: static
+   address: 192.168.10.18
+   netmask: 255.255.255.0
+   gateway: 192.168.10.1
+   route:
+    - network: 192.168.200.0
+      netmask: 255.255.255.0
+      gateway: 192.168.10.1
+    - network: 192.168.100.0
+      netmask: 255.255.255.0
+      gateway: 192.168.10.1
+ - device: eth4
+   bootproto: dhcp
