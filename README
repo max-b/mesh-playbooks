@@ -1,5 +1,0 @@
-
-Test:
-ansible all -m ping -u {{{USER_NAME}}}
-Notes:
-export ANSIBLE_HOSTS=/pathTo/inventory/
