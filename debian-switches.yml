@@ -1,6 +1,6 @@
 # file: debian-switches.yml
 - hosts: debian-switches
   roles:
-    - common
+    - switch
     - openvpn_client
 

@@ -1,0 +1,2 @@
+udp_ip: "{{PILO_BROADCAST}}"
+retransmission_timeout: "{{RETRANSMISSION_TIMEOUT}}"
