@@ -1,4 +1,9 @@
 denovo_soekris ansible_ssh_host=192.168.11.138 ansible_ssh_user=root
 
+testbed_vpn_droplet ansible_ssh_host=104.236.167.80 ansible_ssh_user=root
+
 [debian-switches]
 denovo_soekris
+
+[cloud-servers]
+testbed_vpn_droplet  openvpn_enabled=True

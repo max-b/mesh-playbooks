@@ -1,0 +1,3 @@
+openvpn_host: "{{ansible_ssh_host}}"
+openvpn_use_pam: False 
+openvpn_use_ldap: False

@@ -1,0 +1,6 @@
+---
+# file: roles/cloud_server/tasks/main.yml
+
+- include: openvpn.yml
+  when: openvpn_enabled
+  tags: [openvpn]

@@ -1,0 +1,19 @@
+---
+# File: roles/openvpn_client/tasks/configure-client.yml
+
+- name: OpenVPN | Copy configs
+  copy: src={{ item }} dest=/etc/openvpn/{{item}} owner=root group=root mode=644 backup=no
+  with_items:
+    - "{{ openvpn_config | default('client') }}.conf"
+
+- name: OpenVPN | Copy keys
+  copy: src={{ item }} dest=/etc/openvpn/{{item}} owner=root group=root mode=644 backup=no
+  with_items:
+    - ca.crt
+    - "{{ openvpn_config | default('client') }}.crt"
+
+- name: OpenVPN | Copy private keys
+  copy: src={{ item }} dest=/etc/openvpn/{{item}} owner=root group=root mode=600 backup=no
+  with_items:
+    - "{{ openvpn_config | default('client') }}.key"
+

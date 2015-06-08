@@ -1,0 +1,3 @@
+---
+# file: group_vars/cloud-servers
+openvpn_clients: ['denovo_soekris', 'icsi_soekris']

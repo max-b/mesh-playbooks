@@ -1,0 +1,10 @@
+---
+# File: roles/openvpn_client/default/main.yml
+
+# Aptitude state
+openvpn_apt_state: "latest"
+
+# Default base directory (without trailing '/')
+openvpn_path: "/etc/openvpn"
+openvpn_config_dir: "/etc/openvpn"
+

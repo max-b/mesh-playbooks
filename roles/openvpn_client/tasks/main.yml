@@ -1,0 +1,15 @@
+---
+# file: roles/openvpn_client/tasks/main.yml
+
+## Install
+- include: install-ubuntu.yml
+  # when: ansible_distribution == 'Ubuntu'
+
+# Configure client / server
+- name: OpenVPN | Configure client
+  include: configure-client.yml
+  when: openvpn_config is defined and openvpn_type == 'client'
+
+## Configure service
+- include: configure-upstart.yml
+

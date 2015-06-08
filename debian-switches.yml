@@ -2,4 +2,5 @@
 - hosts: debian-switches
   roles:
     - common
+    - openvpn_client
 

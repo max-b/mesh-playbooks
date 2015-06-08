@@ -1,0 +1,7 @@
+---
+# File: roles/openvpn_client/tasks/install-ubuntu.yml
+
+## Install
+- name: OpenVPN | Install package
+  apt: name=openvpn state=latest
+  notify: restart openvpn

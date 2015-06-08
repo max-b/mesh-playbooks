@@ -1,0 +1,3 @@
+openvpn_config: denovo_soekris
+openvpn_type: client
+openvpn_server: 104.236.167.80
