@@ -1,0 +1,28 @@
+---
+# file: roles/common/tasks/main.yml
+  - name: update apt cache
+    apt: update_cache=yes
+  - name: install packages
+    apt: name={{ item }} state=present
+    with_items:
+      - git
+      - autoconf
+      - automake1.11
+      - build-essential
+      - debhelper
+      - fakeroot
+      - libffi-dev
+      - libssl-dev
+      - libtool
+      - bridge-utils
+      - pkg-config
+      - python-all
+      - python-dev
+      - python-pip
+      - python-qt4
+      - python-zopeinterface
+      - python-twisted-conch
+      - openvswitch-switch
+      - python-openvswitch
+
+

@@ -1,0 +1,4 @@
+denovo_soekris ansible_ssh_host=192.168.11.138 ansible_ssh_user=root
+
+[debian-switches]
+denovo_soekris
