@@ -8,11 +8,19 @@ GIT
 GIT
   remote: https://github.com/max-b/ansible-smokeping.git
   ref: master
-  sha: 1929c829eb5d3a6ef63f641e3806f5f3a53b42e5
+  sha: 80e6fdd52bfee6b17c90cf2d02127b62ec9a6f3a
   specs:
     maxb.smokeping (0.0.0)
 
+GIT
+  remote: https://github.com/picotrading/ansible-collectd
+  ref: master
+  sha: 0afa4c227bba4a021ba3603549893ff255021be1
+  specs:
+    jtyr.collectd (0.0.0)
+
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
+  jtyr.collectd (>= 0)
   maxb.smokeping (>= 0)
 
