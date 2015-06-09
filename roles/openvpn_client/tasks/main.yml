@@ -9,6 +9,7 @@
 - name: OpenVPN | Configure client
   include: configure-client.yml
   when: openvpn_config is defined and openvpn_type == 'client'
+  tags: [openvpn_client_config]
 
 ## Configure service
 - include: configure-upstart.yml
