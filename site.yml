@@ -1,5 +1,4 @@
 ---
 # file: site.yml
-- include: global_vars.yml
 - include: debian-switches.yml
 - include: cloud-servers.yml
