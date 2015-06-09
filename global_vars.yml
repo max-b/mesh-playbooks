@@ -1,3 +1,0 @@
----
-# file: global_vars.yml
-openvpn_subnet: "10.8.0.0/16"

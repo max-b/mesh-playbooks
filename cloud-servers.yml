@@ -1,10 +1,11 @@
 # file: cloud-servers.yml
 - hosts: cloud-servers
   roles:
-    - openvpn_server
+    - role: openvpn_server
+      openvpn_server: "{{openvpn_subnet}} {{openvpn_netmask}}"
       tag: openvpn_server
-    - librarian_roles/maxb.smokeping
-      tag: openvpn_server
+    - role: maxb.smokeping
+      tag: smokeping
     - role: maxb.collectd
       collectd_plugins_custom: "{{
         collectd_plugins_snmp

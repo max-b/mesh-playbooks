@@ -1,0 +1,6 @@
+---
+# file: group_vars/cloud-servers
+
+openvpn_subnet: '10.8.0.0'
+openvpn_netmask: '255.255.0.0'
+ansible_controller: '192.168.11.1'

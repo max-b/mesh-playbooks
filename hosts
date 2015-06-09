@@ -21,3 +21,9 @@ cory_soekris
 [pilo-clients]
 denovo_soekris
 icsi_soekris
+
+[global]
+denovo_soekris
+icsi_soekris
+cory_soekris
+testbed_vpn_droplet 
