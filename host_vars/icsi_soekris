@@ -1,13 +1,13 @@
-openvpn_config: denovo_soekris
+openvpn_config: icsi_soekris
 openvpn_type: client
 openvpn_server: 104.236.167.80
 
 ovs_interfaces: "eth2 eth3"
 pilo_client: true
 pilo_controller: false
-br_mac: "00:00:00:00:00:03"
-pilo_addr: "10.1.100.3/16"
-pilo_ip: "10.1.100.3"
+br_mac: "00:00:00:00:00:02"
+pilo_addr: "10.1.100.2/16"
+pilo_ip: "10.1.100.2"
 
 network_ether_interfaces:
  - device: eth1

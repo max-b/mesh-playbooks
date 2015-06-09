@@ -1,3 +1,24 @@
 ---
 # file: group_vars/cloud-servers
 openvpn_clients: ['denovo_soekris', 'icsi_soekris']
+smokeping_groups:
+  - 
+    name: 'core_testbed'
+    title: 'core_testbed'
+    menu: 'core_testbed'
+    hosts:
+    - 
+      name: 'denovo_soekris'
+      menu: 'denovo_soekris'
+      title: 'denovo_soekris'
+      host: '10.1.1.3'
+    - 
+      name: 'icsi_soekris'
+      menu: 'icsi_soekris'
+      title: 'icsi_soekris'
+      host: '10.1.1.3'
+    -
+      name: 'cory_soekris'
+      menu: 'cory_soekris'
+      title: 'cory_soekris'
+      host: '10.1.1.3'

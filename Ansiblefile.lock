@@ -5,6 +5,14 @@ GIT
   specs:
     bennojoy.network_interface (0.0.0)
 
+GIT
+  remote: https://github.com/max-b/ansible-smokeping.git
+  ref: master
+  sha: 1929c829eb5d3a6ef63f641e3806f5f3a53b42e5
+  specs:
+    maxb.smokeping (0.0.0)
+
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
+  maxb.smokeping (>= 0)
 

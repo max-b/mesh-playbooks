@@ -1,5 +1,6 @@
 # file: cloud-servers.yml
 - hosts: cloud-servers
   roles:
-    - cloud_server
+    # - openvpn_server
+    - librarian_roles/maxb.smokeping
 
