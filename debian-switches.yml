@@ -1,5 +1,6 @@
 # file: debian-switches.yml
 - hosts: debian-switches
+  include: global-vars.yml
   roles:
     - role: switch
       tag: soekris_setup
@@ -9,5 +10,6 @@
       tag: switch_network_setup
     - role: debops.snmpd
       snmpd_allow: [ "{{openvpn_subnet}}" ]
+      tcpwrappers_deny_all: false
       tags: snmpd
 
