@@ -1,6 +1,17 @@
 # file: cloud-servers.yml
 - hosts: cloud-servers
   roles:
-    # - openvpn_server
+    - openvpn_server
+      tag: openvpn_server
     - librarian_roles/maxb.smokeping
+      tag: openvpn_server
+    - role: maxb.collectd
+      collectd_plugins_custom: "{{
+        collectd_plugins_snmp
+      }}"
+      collectd_plugins_snmp:
+        - options:
+          - LoadPlugin: snmp
+      collectd_config_path: /etc/collectd/collectd.conf
+      tag: collectd
 

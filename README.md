@@ -14,8 +14,12 @@ http://docs.ansible.com/intro_installation.html
 Host inventory file is listed in the `hosts` file. Individual hosts can be given variable hostnames
 and used as IP addresses or proper domain names. 
 
+## Requirements
+python-netaddr
+
 ## Networking Setup
-You can set up individual network configs in host_vars/{{hostname}}. For example, the contents of host_vars/denovo_soekris include:
+You can set up individual network configs in host_vars/{{hostname}}. For example, the contents of host_vars/denovo_soekris might include:
+
 ```
 network_ether_interfaces:
  - device: eth1
@@ -26,7 +30,7 @@ network_ether_interfaces:
  - device: eth0
    bootproto: dhcp
 ```
-
+REMEMBER THAT THESE CHANGES HAVE THE POSSIBILITY OF LOCKING YOU OUT!
 
 ## OpenVPN Server
 I'm using a cheap, $5/mo droplet from digital ocean. It's ubuntu 14.04 lts, although I assume that debian would

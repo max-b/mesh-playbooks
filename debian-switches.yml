@@ -1,7 +1,13 @@
 # file: debian-switches.yml
 - hosts: debian-switches
   roles:
-    - switch
-    - openvpn_client
-    - librarian_roles/bennojoy.network_interface
+    - role: switch
+      tag: soekris_setup
+    - role: openvpn_client
+      tag: openvpn_client
+    - role: bennojoy.network_interface
+      tag: switch_network_setup
+    - role: debops.snmpd
+      snmpd_allow: [ "{{openvpn_subnet}}" ]
+      tags: snmpd
 

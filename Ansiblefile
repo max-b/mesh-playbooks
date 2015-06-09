@@ -5,4 +5,10 @@ site "https://galaxy.ansible.com/api/v1"
 
 role "bennojoy.network_interface"
 role "maxb.smokeping", git:"https://github.com/max-b/ansible-smokeping.git" 
-role "jtyr.collectd"
+role "maxb.collectd", git:"https://github.com/max-b/ansible-collectd.git" 
+role "debops.snmpd"
+role "debops.ferm"
+role "debops.secret"
+role "debops.apt_preferences"
+role "debops.tcpwrappers"
+
