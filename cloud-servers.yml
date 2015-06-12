@@ -16,3 +16,11 @@
       collectd_config_path: /etc/collectd/collectd.conf
       tag: collectd
 
+    - role: icinga.icinga2-ansible-no-ui
+      check_commands:
+      tags: icinga2-no-ui
+
+    - role: icinga.icinga2-ansible-classic-ui
+      icinga2_classic_ui_passwd: 'CHANGEME'
+      tags: icinga2-classic-ui
+

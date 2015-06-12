@@ -1,4 +1,20 @@
 GIT
+  remote: https://github.com/Icinga/icinga2-ansible.git
+  path: icinga2-ansible-add-hosts
+  ref: master
+  sha: aff2b5bf10d1d0fa01e47f2e189cf3737e6678a4
+  specs:
+    icinga.icinga2-ansible-add-hosts (0.0.0)
+
+GIT
+  remote: https://github.com/Icinga/icinga2-ansible.git
+  path: icinga2-ansible-classic-ui
+  ref: master
+  sha: aff2b5bf10d1d0fa01e47f2e189cf3737e6678a4
+  specs:
+    icinga.icinga2-ansible-classic-ui (0.0.0)
+
+GIT
   remote: https://github.com/bennojoy/network_interface
   ref: master
   sha: 5e28199636d9b3386e4946559334b77ce5e8e35f
@@ -42,17 +58,33 @@ GIT
 
 GIT
   remote: https://github.com/max-b/ansible-collectd.git
-  ref: master
+  ref: maxb
   sha: 8910b5a0b6c90c3004affaa69f1905a27655a81a
   specs:
     maxb.collectd (0.0.0)
 
 GIT
   remote: https://github.com/max-b/ansible-smokeping.git
-  ref: master
+  ref: maxb
   sha: 80e6fdd52bfee6b17c90cf2d02127b62ec9a6f3a
   specs:
     maxb.smokeping (0.0.0)
+
+GIT
+  remote: https://github.com/max-b/icinga2-ansible.git
+  path: icinga2-ansible-no-ui
+  ref: maxb
+  sha: fc7b8ed9c3f471670939766d1dbec780b77b0b7c
+  specs:
+    icinga.icinga2-ansible-no-ui (0.0.0)
+
+GIT
+  remote: https://github.com/max-b/icinga2-ansible.git
+  path: icinga2-ansible-web-ui
+  ref: maxb
+  sha: fc7b8ed9c3f471670939766d1dbec780b77b0b7c
+  specs:
+    icinga.icinga2-ansible-web-ui (0.0.0)
 
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
@@ -61,6 +93,10 @@ DEPENDENCIES
   debops.secret (>= 0)
   debops.snmpd (>= 0)
   debops.tcpwrappers (>= 0)
+  icinga.icinga2-ansible-add-hosts (>= 0)
+  icinga.icinga2-ansible-classic-ui (>= 0)
+  icinga.icinga2-ansible-no-ui (>= 0)
+  icinga.icinga2-ansible-web-ui (>= 0)
   maxb.collectd (>= 0)
   maxb.smokeping (>= 0)
 

@@ -42,6 +42,11 @@ I found that using librarian-ansible was a decent way to consume other folks mor
 It is a ruby gem, and the Gemfile is under /ruby, but I'm crossing my fingers that there won't really be a need to 
 tinker with it too much.
 
+To install playbooks in your Ansiblefile with verbose debug output, use:
+```
+librarian-ansible install --verbose
+```
+
 # Usage
 
 `ansible all -m ping`
