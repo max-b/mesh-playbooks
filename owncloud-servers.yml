@@ -2,6 +2,6 @@
 - hosts: owncloud-servers
   gather_facts: True
   roles:
-    - role: Dhar.owncloud
+    - role: maxb.owncloud
       tags: "owncloud_setup"
 

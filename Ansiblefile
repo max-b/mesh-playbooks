@@ -6,5 +6,5 @@ site "https://galaxy.ansible.com/api/v1"
 role "bennojoy.network_interface"
 role "maxb.smokeping", git:"https://github.com/max-b/ansible-smokeping.git", ref:"maxb"  
 role "maxb.collectd", git:"https://github.com/max-b/ansible-collectd.git", ref:"maxb"
-role "Dhar.owncloud"
+role "maxb.owncloud", git:"https://github.com/max-b/ansible-owncloud.git", ref:"maxb"
 

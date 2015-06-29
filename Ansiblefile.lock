@@ -6,18 +6,18 @@ GIT
     bennojoy.network_interface (0.0.0)
 
 GIT
-  remote: https://github.com/dhar/ansible-owncloud
-  ref: master
-  sha: b1159d9230524abd7474fcc97de491f6b14fcbf3
-  specs:
-    Dhar.owncloud (0.0.0)
-
-GIT
   remote: https://github.com/max-b/ansible-collectd.git
   ref: maxb
   sha: 8910b5a0b6c90c3004affaa69f1905a27655a81a
   specs:
     maxb.collectd (0.0.0)
+
+GIT
+  remote: https://github.com/max-b/ansible-owncloud.git
+  ref: maxb
+  sha: dc5be2afa062cdb0fb6603866b504029563f6903
+  specs:
+    maxb.owncloud (0.0.0)
 
 GIT
   remote: https://github.com/max-b/ansible-smokeping.git
@@ -27,8 +27,8 @@ GIT
     maxb.smokeping (0.0.0)
 
 DEPENDENCIES
-  Dhar.owncloud (>= 0)
   bennojoy.network_interface (>= 0)
   maxb.collectd (>= 0)
+  maxb.owncloud (>= 0)
   maxb.smokeping (>= 0)
 
