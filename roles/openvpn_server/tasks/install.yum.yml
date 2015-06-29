@@ -1,4 +1,0 @@
----
-# file: roles/cloud_server/tasks/install.yum.yml
-
-- fail: msg="RedHat is not supported now"

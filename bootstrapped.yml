@@ -1,0 +1,7 @@
+# file: bootstrapped.yml
+- hosts: bootstrapped
+  gather_facts: False
+  roles:
+    - role: bootstrap
+      tags: "bootstrap"
+

@@ -1,0 +1,8 @@
+---
+# file: roles/bootstrap/tasks/main.yml
+
+## Install Python
+ - name: install ansible python dependencies
+   raw: apt-get update && apt-get -y install python python-apt python-simplejson
+
+
