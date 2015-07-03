@@ -1,0 +1,16 @@
+# Ignore user-created DebOps directories
+playbooks/roles
+roles
+inventory
+inventory.secret
+
+*.pyc
+
+# Created by http://gitignore.io
+
+### vim ###
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~

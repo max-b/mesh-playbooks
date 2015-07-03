@@ -5,4 +5,8 @@ ansible_controller: '192.168.11.1'
 
 mesh_subnet: '100.64.0.0/10'
 
+# Keep the pretty aggressive debops firewall
+# settings from locking us out of anything for the time being
+tcpwrappers_deny_all: false
+
 secret_levels: ''

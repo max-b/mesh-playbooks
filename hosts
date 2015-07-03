@@ -4,6 +4,9 @@ maxb_banana_pi ansible_ssh_host=192.168.11.135 ansible_ssh_user=root
 [owncloud-servers]
 maxb_banana_pi
 
+[etherpad-servers]
+maxb_banana_pi
+
 [bootstrapped]
 maxb_banana_pi
 
