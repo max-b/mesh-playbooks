@@ -1,0 +1,14 @@
+# file: monitored-devices.yml
+- hosts: monitored-devices
+  gather_facts: True
+  roles:
+    - role: oefenweb.apt
+      tags: ['apt-configure', 'snmpd-configure']
+    - role: debops.secret
+      tags: setup-secrets
+    - role: debops.snmpd
+      snmpd_allow: [ "{{mesh_subnet}}" ]
+      tcpwrappers_deny_all: false
+      no_log: False
+      tags: ['snmpd-configure']
+

@@ -1,9 +1,51 @@
 GIT
+  remote: https://github.com/Oefenweb/ansible-apt.git
+  ref: master
+  sha: d427cf3b23ba899c45714326a430e072b0c1698f
+  specs:
+    oefenweb.apt (0.0.0)
+
+GIT
   remote: https://github.com/bennojoy/network_interface
   ref: master
   sha: 5e28199636d9b3386e4946559334b77ce5e8e35f
   specs:
     bennojoy.network_interface (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-apt_preferences
+  ref: master
+  sha: 6a7c04591897f9ef2f4ef72a7a75168124e290bc
+  specs:
+    debops.apt_preferences (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-ferm
+  ref: master
+  sha: 841ca46bf129cd7471e817e34344dc172c20b668
+  specs:
+    debops.ferm (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-secret
+  ref: master
+  sha: 431e1757c47c94ea25567e54e227c5554649b323
+  specs:
+    debops.secret (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-snmpd
+  ref: master
+  sha: 4320347f5f42b1c28f41269bb0c4640f01709d1c
+  specs:
+    debops.snmpd (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-tcpwrappers
+  ref: master
+  sha: 221a0ea268df5cce76eb3c5a3c60846c92c7af17
+  specs:
+    debops.tcpwrappers (0.0.0)
 
 GIT
   remote: https://github.com/max-b/ansible-collectd.git
@@ -26,9 +68,23 @@ GIT
   specs:
     maxb.smokeping (0.0.0)
 
+GIT
+  remote: https://github.com/max-b/mysql.git
+  ref: maxb
+  sha: 3d304b606ca8de89e688906f61c2611ecf4b40ee
+  specs:
+    maxb.mysql (0.0.0)
+
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
+  debops.apt_preferences (>= 0)
+  debops.ferm (>= 0)
+  debops.secret (>= 0)
+  debops.snmpd (>= 0)
+  debops.tcpwrappers (>= 0)
   maxb.collectd (>= 0)
+  maxb.mysql (>= 0)
   maxb.owncloud (>= 0)
   maxb.smokeping (>= 0)
+  oefenweb.apt (>= 0)
 

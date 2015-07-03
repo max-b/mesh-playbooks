@@ -2,6 +2,10 @@
 - hosts: owncloud-servers
   gather_facts: True
   roles:
+    - role: maxb.mysql
+      mysql_service: 'mysql'
+      tags: 'mysql_setup'
     - role: maxb.owncloud
-      tags: "owncloud_setup"
+      tags: 'owncloud_setup'
+
 

@@ -1,3 +1,0 @@
-udp_ip: "10.1.255.255"
-retransmission_timeout: 3
-udp_port: 5005

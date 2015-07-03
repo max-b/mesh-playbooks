@@ -2,3 +2,7 @@
 # file: group_vars/global
 
 ansible_controller: '192.168.11.1'
+
+mesh_subnet: '100.64.0.0/10'
+
+secret_levels: ''

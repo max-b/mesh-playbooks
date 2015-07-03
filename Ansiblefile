@@ -4,7 +4,14 @@
 site "https://galaxy.ansible.com/api/v1"
 
 role "bennojoy.network_interface"
+role "oefenweb.apt", git:"https://github.com/Oefenweb/ansible-apt.git"
 role "maxb.smokeping", git:"https://github.com/max-b/ansible-smokeping.git", ref:"maxb"  
 role "maxb.collectd", git:"https://github.com/max-b/ansible-collectd.git", ref:"maxb"
 role "maxb.owncloud", git:"https://github.com/max-b/ansible-owncloud.git", ref:"maxb"
+role "maxb.mysql", git:"https://github.com/max-b/mysql.git", ref:"maxb"
+role "debops.snmpd"
+role "debops.ferm"
+role "debops.secret"
+role "debops.apt_preferences"
+role "debops.tcpwrappers"
 

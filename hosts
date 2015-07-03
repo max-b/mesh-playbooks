@@ -9,3 +9,12 @@ maxb_banana_pi
 
 [banana-servers]
 maxb_banana_pi
+
+[monitored-devices]
+maxb_banana_pi
+
+[debops_snmpd:children]
+monitored-devices
+
+[global]
+maxb_banana_pi
