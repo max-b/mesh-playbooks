@@ -55,13 +55,6 @@ GIT
     debops.nginx (0.0.0)
 
 GIT
-  remote: https://github.com/debops/ansible-nodejs
-  ref: master
-  sha: 62910937c597e0c9d0570d375f3bce505d39fd5c
-  specs:
-    debops.nodejs (0.0.0)
-
-GIT
   remote: https://github.com/debops/ansible-secret
   ref: master
   sha: 431e1757c47c94ea25567e54e227c5554649b323
@@ -88,6 +81,13 @@ GIT
   sha: 8910b5a0b6c90c3004affaa69f1905a27655a81a
   specs:
     maxb.collectd (0.0.0)
+
+GIT
+  remote: https://github.com/max-b/ansible-nodejs.git
+  ref: maxb
+  sha: 7a4b02cec18394c1b79dc80e28554c2a03e3c9bc
+  specs:
+    debops.nodejs (0.0.0)
 
 GIT
   remote: https://github.com/max-b/ansible-owncloud.git
