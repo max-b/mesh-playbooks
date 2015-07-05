@@ -1,4 +1,11 @@
 GIT
+  remote: git@github.com:knopki/ansible-hostname.git
+  ref: master
+  sha: d23851655c1a6b82745f36c745f610230c1b5cd6
+  specs:
+    hostname (0.0.0)
+
+GIT
   remote: https://github.com/Oefenweb/ansible-apt.git
   ref: master
   sha: d427cf3b23ba899c45714326a430e072b0c1698f
@@ -85,14 +92,14 @@ GIT
 GIT
   remote: https://github.com/max-b/ansible-nodejs.git
   ref: maxb
-  sha: 7a4b02cec18394c1b79dc80e28554c2a03e3c9bc
+  sha: d6be3df2a029d7ce34a84aed6b5f5a51da2d579f
   specs:
     debops.nodejs (0.0.0)
 
 GIT
   remote: https://github.com/max-b/ansible-owncloud.git
   ref: maxb
-  sha: dc5be2afa062cdb0fb6603866b504029563f6903
+  sha: e8ffe48718c26552280e5c7a65454ca73aa7e902
   specs:
     maxb.owncloud (0.0.0)
 
@@ -122,6 +129,7 @@ DEPENDENCIES
   debops.secret (>= 0)
   debops.snmpd (>= 0)
   debops.tcpwrappers (>= 0)
+  hostname (>= 0)
   maxb.collectd (>= 0)
   maxb.mysql (>= 0)
   maxb.owncloud (>= 0)

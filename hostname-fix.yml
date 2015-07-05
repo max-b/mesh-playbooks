@@ -1,0 +1,8 @@
+# file: hostname-fix.yml
+- hosts: maxb_banana_pi
+  user: root
+  ##TODO: ADD NETWORK RESTART/RELOAD
+  roles:
+    - role: hostname
+
+
