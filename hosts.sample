@@ -1,0 +1,25 @@
+# Replace raspi1 with your preferred hostname and 100.64.4.1 with either a 
+# fqdn (hostname with domain name) or ip address
+# The coordinating host_vars file should be in the form of:
+# ./host_vars/raspi1
+#
+raspi1 ansible_ssh_host=100.64.4.1 ansible_ssh_user=root
+
+
+[owncloud-servers]
+raspi
+
+[etherpad-servers]
+raspi
+
+[bootstrapped]
+raspi
+
+[monitored-devices]
+raspi
+
+[debops_snmpd:children]
+monitored-devices
+
+[global]
+raspi

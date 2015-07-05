@@ -1,0 +1,29 @@
+network_ether_interfaces:
+ - device: eth0
+   bootproto: dhcp
+owncloud_owncloud_mysql_password: 'OWNCLOUD_MYSQL_PASSWORD' ## CHANGEME
+owncloud_owncloud_root_password: 'OWNCLOUD_ROOT_PASSWORD' ## CHANGEME
+owncloud_owncloud_data_dir: '/mnt/owncloud_disk' ## CHANGEME
+
+owncloud_mount_drive: True
+owncloud_drive_label: 'OWNCLOUD' ## label of drive if using external drive
+owncloud_drive_fstype: 'ext4' ## label of drive if using external drive
+
+mysql_root_db_pass: 'MYSQL_ROOT_DB_PASSWORD' ## CHANGEME
+
+mysql_db: 
+     - name: owncloud
+       replicate: no
+
+mysql_users:
+     - name: owncloud
+       pass: OWNCLOUD_MYSQL_PASSWORD ## CHANGEME TO MATCH ABOVE
+
+snmpd_sys_contact_name: my contact name
+snmpd_sys_contact_email: my_contact_email@sudomesh.org
+snmpd_organization: my_contact_org
+
+etherpad_database: mysql
+
+hostname_name: "raspi" ## CHANGEME to match your hostname
+hostname_domain: "sudomesh.org" ## CHANGEME if you want to use a different domain name

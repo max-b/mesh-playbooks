@@ -10,6 +10,12 @@ This requires ansible to be installed on the host system. Installation, setup, e
 http://docs.ansible.com/intro_installation.html
 
 # Configuration
+
+Copy `./hosts.sample` to `./hosts`
+
+Make relevant changes. Remember to create the appropriate `./host_vars/` file. You can examine files in 
+`./host_vars.sample` for relevant config sections.
+
 Host inventory file is listed in the `hosts` file. Individual hosts can be given variable hostnames
 and used as IP addresses or proper domain names. 
 
@@ -17,7 +23,7 @@ and used as IP addresses or proper domain names.
 python-netaddr
 
 ## Networking Setup
-You can set up individual network configs in host_vars/{{hostname}}. For example, the contents of host_vars/maxb_banana_pi might include:
+You can set up individual network configs in host_vars/{{hostname}}. For example, the contents of host_vars/raspi might include:
 
 ```
 network_ether_interfaces:
