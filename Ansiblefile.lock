@@ -20,6 +20,13 @@ GIT
     bennojoy.network_interface (0.0.0)
 
 GIT
+  remote: https://github.com/debops/ansible-apt
+  ref: master
+  sha: f666d3da7cbc59590c7c215ce8c084e343d13bb4
+  specs:
+    debops.apt (0.0.0)
+
+GIT
   remote: https://github.com/debops/ansible-apt_preferences
   ref: master
   sha: 6a7c04591897f9ef2f4ef72a7a75168124e290bc
@@ -32,13 +39,6 @@ GIT
   sha: 1a25acd94f9f5b1b51d3f17e97737cff6d4916b7
   specs:
     debops.etc_services (0.0.0)
-
-GIT
-  remote: https://github.com/debops/ansible-etherpad
-  ref: master
-  sha: 03a0b8678b444b7c989f3483a45c6c6c26170648
-  specs:
-    debops.etherpad (0.0.0)
 
 GIT
   remote: https://github.com/debops/ansible-ferm
@@ -60,6 +60,20 @@ GIT
   sha: 1b0c4d92645de59952b4a28f027dc78a68ac36bd
   specs:
     debops.nginx (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-php5
+  ref: master
+  sha: 5e926024abd3a7054d9bb24985cd91601fa7639c
+  specs:
+    debops.php5 (0.0.0)
+
+GIT
+  remote: https://github.com/debops/ansible-postgresql
+  ref: master
+  sha: d3ba26feb7e8278a079bd5e319d95709ddc0a0ea
+  specs:
+    debops.postgresql (0.0.0)
 
 GIT
   remote: https://github.com/debops/ansible-secret
@@ -90,6 +104,13 @@ GIT
     maxb.collectd (0.0.0)
 
 GIT
+  remote: https://github.com/max-b/ansible-etherpad.git
+  ref: master
+  sha: 3410009eecf4c29109b65fb7deae6a15a020d7fc
+  specs:
+    debops.etherpad (0.0.0)
+
+GIT
   remote: https://github.com/max-b/ansible-nodejs.git
   ref: maxb
   sha: d6be3df2a029d7ce34a84aed6b5f5a51da2d579f
@@ -111,6 +132,13 @@ GIT
     maxb.smokeping (0.0.0)
 
 GIT
+  remote: https://github.com/max-b/debops-owncloud.git
+  ref: master
+  sha: 3a2c1efc4df0f0c681349f23bfbb8fc5a16f0063
+  specs:
+    debops.owncloud (0.0.0)
+
+GIT
   remote: https://github.com/max-b/mysql.git
   ref: maxb
   sha: 3d304b606ca8de89e688906f61c2611ecf4b40ee
@@ -119,6 +147,7 @@ GIT
 
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
+  debops.apt (>= 0)
   debops.apt_preferences (>= 0)
   debops.etc_services (>= 0)
   debops.etherpad (>= 0)
@@ -126,6 +155,9 @@ DEPENDENCIES
   debops.mysql (>= 0)
   debops.nginx (>= 0)
   debops.nodejs (>= 0)
+  debops.owncloud (>= 0)
+  debops.php5 (>= 0)
+  debops.postgresql (>= 0)
   debops.secret (>= 0)
   debops.snmpd (>= 0)
   debops.tcpwrappers (>= 0)

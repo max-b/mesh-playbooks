@@ -1,0 +1,49 @@
+---
+
+dependencies:
+
+  - role: debops.secret
+
+  - role: debops.apt_preferences
+    tags: apt_preferences
+    apt_preferences_dependent_list:
+
+      - package: 'git git-*'
+        backports: [ 'wheezy' ]
+        reason:  'Better support for git submodules - http://stackoverflow.com/a/7593496'
+        by_role: 'debops.apt'
+
+      - package: 'irqbalance'
+        backports: [ 'wheezy' ]
+        reason:  'Issues in wheezy package - http://debian.distrosfaqs.org/debian-user/wheezy-irqbalance/'
+        by_role: 'debops.apt'
+
+
+  #- role: debops.etc_services
+  #  when: (apt is defined and apt) and (apt != True and apt == ansible_fqdn)
+
+  #- role: debops.ferm
+  #  when: (apt is defined and apt) and (apt != True and apt == ansible_fqdn)
+
+
+galaxy_info:
+  author: 'Maciej Delmanowski'
+  description: 'Configure and manage APT Package Manager'
+  company: 'DebOps'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '1.7.0'
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - quantal
+    - raring
+    - saucy
+    - trusty
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  categories:
+  - system
+

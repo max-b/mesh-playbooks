@@ -1,11 +1,15 @@
 # file: owncloud-servers.yml
 - hosts: owncloud-servers
   gather_facts: True
-  roles:
-    - role: maxb.mysql
-      mysql_service: 'mysql'
-      tags: 'mysql_setup'
-    - role: maxb.owncloud
-      tags: 'owncloud_setup'
 
+  roles:
+    - role: mount_drive
+      mount_dir: owncloud_home
+      drive_label: owncloud_drive_label
+      drive_fstype: owncloud_drive_fstype
+      when: owncloud_mount_drive
+
+    - role: debops.owncloud
+      owncloud_dependencies: True 
+      owncloud_domain: [ '{{ ansible_fqdn }}' ]
 

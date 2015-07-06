@@ -3,6 +3,8 @@
   gather_facts: True
   roles:
     - role: debops.etherpad
+      etherpad_version: 'master'
+      etherpad_trust_proxy: True
+      etherpad_dependencies: True
       tags: 'etherpad_setup'
-
-
+      

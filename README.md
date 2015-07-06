@@ -6,8 +6,23 @@ This is a mostly ansible setup for installing peoplesopen.net or other mesh serv
 
 # Install Dependencies
 
-This requires ansible to be installed on the host system. Installation, setup, etc can be found here:
-http://docs.ansible.com/intro_installation.html
+```
+apt-get install python-virtualenv python-netaddr
+git clone https://github.com/max-b/mesh-playbooks.git
+cd mesh-playbooks
+virtualenv venv
+source ./venv/bin/activate
+pip install < requirements.txt
+```
+
+You can then use commands like `ansible` or `ansible-playbook` on the command line in that directory.
+When you're done, you can use `deactivate` which will reset your environment.
+When you come back to work on it, you can just cd into the folder and then:
+
+```
+source ./venv/bin/activate
+```
+
 
 # Configuration
 
@@ -20,7 +35,6 @@ Host inventory file is listed in the `hosts` file. Individual hosts can be given
 and used as IP addresses or proper domain names. 
 
 ## Requirements
-python-netaddr
 
 ## Networking Setup
 You can set up individual network configs in host_vars/{{hostname}}. For example, the contents of host_vars/raspi might include:

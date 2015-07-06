@@ -1,0 +1,8 @@
+---
+# file: roles/mount_drive/tasks/main.yml
+
+- name: Add mount path if not there
+  file: path={{ mount_dir }} state=directory owner=www-data group=www-data
+
+- name: Add mounted drive if appropriate
+  mount: name={{ mount_dir }} src='LABEL={{ drive_label }}' opts='defaults,rw' fstype={{ drive_fstype }} state=present

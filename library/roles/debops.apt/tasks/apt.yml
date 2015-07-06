@@ -1,0 +1,91 @@
+---
+
+- name: Configure APT
+  template:
+    src: '{{ item }}.j2'
+    dest: '/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - 'etc/apt/apt.conf.d/25no-recommends.conf'
+    - 'etc/apt/apt.conf.d/70aptitude'
+
+- name: Load default APT mirrors configuration
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '../vars/apt_default_mirrors_{{ apt_default_mirrors_lookup | lower }}.yml'
+    - '../vars/apt_default_mirrors.yml'
+  when: apt_default_mirrors is undefined
+
+- name: Load default APT sources configuration
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '../vars/apt_default_sources_{{ apt_default_sources_lookup | lower }}.yml'
+    - '../vars/apt_default_sources.yml'
+  when: apt_default_sources is undefined
+
+- name: Enable delayed APT configuration
+  set_fact:
+    apt_keys_delayed_enabled: '{{ apt_keys_delayed + apt_group_keys_delayed + apt_host_keys_delayed }}'
+    apt_repositories_delayed_enabled: '{{ apt_repositories_delayed + apt_group_repositories_delayed + apt_host_repositories_delayed }}'
+    apt_sources_delayed_enabled: '{{ apt_sources_delayed + apt_group_sources_delayed + apt_host_sources_delayed }}'
+  when: ansible_local is defined and ansible_local.apt is defined
+
+- name: Combine lists of default and user APT mirrors and sources
+  set_fact:
+    apt_keys_combined: '{{ apt_keys + apt_group_keys + apt_host_keys + apt_keys_delayed_enabled | default([]) }}'
+    apt_repositories_combined: '{{ apt_repositories + apt_group_repositories + apt_host_repositories + apt_repositories_delayed_enabled | default([]) }}'
+    apt_mirrors_combined: '{{ apt_mirrors + apt_group_mirrors + apt_host_mirrors + apt_default_mirrors | default([]) }}'
+    apt_sources_combined: '{{ apt_default_sources | default([]) + apt_sources + apt_group_sources + apt_host_sources + apt_sources_delayed_enabled | default([]) }}'
+
+- name: Configure custom APT keys
+  apt_key:
+    data: '{{ item.data   | default(omit) }}'
+    file: '{{ item.file   | default(omit) }}'
+    id:   '{{ item.id     | default(omit) }}'
+    keyring: '{{ item.keyring | default(omit) }}'
+    keyserver: '{{ item.keyserver | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
+    url: '{{ item.url | default(omit) }}'
+  with_items: apt_keys_combined
+  when: (item.url is defined or item.data is defined or item.id is defined or item.file is defined and
+         (item.state is undefined or item.state is defined))
+
+- name: Configure custom APT repositories
+  apt_repository:
+    repo: '{{ item.repo }}'
+    state: '{{ item.state | default("present") }}'
+    update_cache: False
+  with_items: apt_repositories_combined
+  when: ((item.repo is defined and item.repo) and
+         (item.state is undefined or item.state is defined))
+
+- name: Divert original /etc/apt/sources.list
+  command: dpkg-divert --quiet --local --divert /etc/apt/sources.list.dpkg-divert --rename /etc/apt/sources.list
+           creates=/etc/apt/sources.list.dpkg-divert
+  when: apt_sources_combined
+
+- name: Configure main APT package sources
+  template:
+    src: 'etc/apt/sources.list.j2'
+    dest: '/etc/apt/sources.list'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: apt_sources_combined
+
+- name: Move sources.list out of the way before reversion
+  # only remove sources.list if sources.list.dpkg-divert exists
+  command: rm -f /etc/apt/sources.list removes=/etc/apt/sources.list.dpkg-divert
+  when: not apt_sources_combined
+
+- name: Remove diversion of original /etc/apt/sources.list
+  command: dpkg-divert --quiet --local --rename --remove /etc/apt/sources.list
+           removes=/etc/apt/sources.list.dpkg-divert
+  when: not apt_sources_combined
+
+- name: Update package lists
+  apt: update_cache=yes
+
+
