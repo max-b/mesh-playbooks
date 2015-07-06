@@ -4,12 +4,14 @@
 
   roles:
     - role: mount_drive
-      mount_dir: owncloud_home
-      drive_label: owncloud_drive_label
-      drive_fstype: owncloud_drive_fstype
+      mount_dir: "{{ owncloud_data_path }}"
+      drive_label: "{{ owncloud_drive_label }}"
+      drive_fstype: "{{ owncloud_drive_fstype }}"
       when: owncloud_mount_drive
+      tags: mount_that_drive
 
     - role: debops.owncloud
+      owncloud_autosetup: False
       owncloud_dependencies: True 
       owncloud_domain: [ '{{ ansible_fqdn }}' ]
 
