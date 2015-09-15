@@ -16,6 +16,6 @@
       # Max upload size set in nginx and php5, with amount as M or G
       owncloud_upload_size: '2G'
       # Output buffering set in php5, with amount set in megabytes
-      owncloud_php5_output_buffering: '128'
+      owncloud_php5_output_buffering: '2048'
       owncloud_domain: [ '{{ ansible_fqdn }}' ]
 
