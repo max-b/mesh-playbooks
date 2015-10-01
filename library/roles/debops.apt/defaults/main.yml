@@ -1,8 +1,10 @@
 ---
 
-# Manage APT package manager (set to False to disable)
-# Set to FQDN of a host to specify it as host for
-#    apt-cacher-ng - apt-get cache
+# Manage APT package manager
+#
+# Set to FQDN of a host to specify it as host for apt-cacher-ng (an apt proxy server).
+# (This proxy will be used by all other hosts).
+# Set to False if you not want Ansible to configure apt.
 apt: True
 
 # Send mail notifications from APT to these email addresses
@@ -108,7 +110,7 @@ apt_sources_release_list:
   - '{{ apt_sources_release_updates }}'
   - '{{ apt_sources_release_backports }}'
 
-# List of repository types to eanble for default APT repositories. To enable
+# List of repository types to enable for default APT repositories. To enable
 # source repositories, add 'deb-src' to the list.
 apt_sources_types: [ 'deb' ]
 
@@ -149,6 +151,15 @@ apt_unattended_upgrades_autoremove: True
 
 
 # ---- Other ----
+
+# .. envvar:: apt_remove_default_configuration
+#
+# Ensure that ``/etc/apt/apt.conf`` is absent.
+# This file might contain APT proxy or other settings which overwrite options
+# set by ``debops.apt`` if present.
+# Thus the default is to ensure that this file is absent.
+apt_remove_default_configuration: True
+
 
 # Update APT cache early in the playbook if it's older than 24h
 # Set to False to disable update (useful when changing APT mirrors)

@@ -8,7 +8,7 @@ GIT
 GIT
   remote: https://github.com/Oefenweb/ansible-apt.git
   ref: master
-  sha: d427cf3b23ba899c45714326a430e072b0c1698f
+  sha: 42c2c3bf8b1172470a70d816186e95a82527a198
   specs:
     oefenweb.apt (0.0.0)
 
@@ -22,14 +22,14 @@ GIT
 GIT
   remote: https://github.com/debops/ansible-apt
   ref: master
-  sha: f666d3da7cbc59590c7c215ce8c084e343d13bb4
+  sha: 81c81f293ff5949b19d4ea5aaf2d0afe04630b0e
   specs:
     debops.apt (0.0.0)
 
 GIT
   remote: https://github.com/debops/ansible-apt_preferences
   ref: master
-  sha: 6a7c04591897f9ef2f4ef72a7a75168124e290bc
+  sha: 8bcadeb92509b000303be165c9aabe6c3fd45224
   specs:
     debops.apt_preferences (0.0.0)
 
@@ -43,7 +43,7 @@ GIT
 GIT
   remote: https://github.com/debops/ansible-ferm
   ref: master
-  sha: 841ca46bf129cd7471e817e34344dc172c20b668
+  sha: a60829dab90debc66b59f411b74b4639d794a509
   specs:
     debops.ferm (0.0.0)
 
@@ -57,14 +57,14 @@ GIT
 GIT
   remote: https://github.com/debops/ansible-nginx
   ref: master
-  sha: 1b0c4d92645de59952b4a28f027dc78a68ac36bd
+  sha: 7917c2ab8766eaca3ee5fa7748de07cbc7b82a6d
   specs:
     debops.nginx (0.0.0)
 
 GIT
   remote: https://github.com/debops/ansible-php5
   ref: master
-  sha: 5e926024abd3a7054d9bb24985cd91601fa7639c
+  sha: cfa86ada833f940ff73b0254a32a6c278decfa18
   specs:
     debops.php5 (0.0.0)
 
@@ -78,14 +78,14 @@ GIT
 GIT
   remote: https://github.com/debops/ansible-secret
   ref: master
-  sha: 431e1757c47c94ea25567e54e227c5554649b323
+  sha: 66e0124bbd02ea4e844f9ae249f4624cf435299d
   specs:
     debops.secret (0.0.0)
 
 GIT
   remote: https://github.com/debops/ansible-snmpd
   ref: master
-  sha: 4320347f5f42b1c28f41269bb0c4640f01709d1c
+  sha: d5124b72c82c1e60a8418e7c6a4eb76a2416f2ee
   specs:
     debops.snmpd (0.0.0)
 
@@ -99,7 +99,7 @@ GIT
 GIT
   remote: https://github.com/max-b/ansible-collectd.git
   ref: maxb
-  sha: 8910b5a0b6c90c3004affaa69f1905a27655a81a
+  sha: 9614050b69d1448483a3e3e912d7c7507eda3623
   specs:
     maxb.collectd (0.0.0)
 
@@ -127,7 +127,7 @@ GIT
 GIT
   remote: https://github.com/max-b/ansible-smokeping.git
   ref: maxb
-  sha: 80e6fdd52bfee6b17c90cf2d02127b62ec9a6f3a
+  sha: 95f21119619c801a7abacb1a3e3d74ed1e5f6e31
   specs:
     maxb.smokeping (0.0.0)
 
@@ -144,6 +144,13 @@ GIT
   sha: 3d304b606ca8de89e688906f61c2611ecf4b40ee
   specs:
     maxb.mysql (0.0.0)
+
+GIT
+  remote: https://github.com/nicolai86/ansible-buildbot
+  ref: master
+  sha: 8bdbfa5c36568ffa91da286d065867472558aa96
+  specs:
+    nicolai86.buildbot (0.0.0)
 
 DEPENDENCIES
   bennojoy.network_interface (>= 0)
@@ -166,5 +173,6 @@ DEPENDENCIES
   maxb.mysql (>= 0)
   maxb.owncloud (>= 0)
   maxb.smokeping (>= 0)
+  nicolai86.buildbot (>= 0)
   oefenweb.apt (>= 0)
 

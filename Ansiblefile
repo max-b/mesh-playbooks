@@ -24,4 +24,4 @@ role "debops.etc_services"
 role "debops.mysql"
 role "debops.nginx"
 role "debops.etherpad", git:"https://github.com/max-b/ansible-etherpad.git", ref:"master"
-
+role "nicolai86.buildbot"
