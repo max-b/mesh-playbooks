@@ -1,0 +1,13 @@
+[Unit]
+Description=Tunneldigger L2TPv3 client daemon
+After=syslog.target
+
+[Service]
+EnvironmentFile=-/etc/default/tunneldigger-client
+ExecStart=/opt/tunneldigger/client/l2tp_client -f $CLIENT_ARGS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

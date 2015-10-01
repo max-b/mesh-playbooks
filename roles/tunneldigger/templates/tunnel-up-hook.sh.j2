@@ -1,0 +1,21 @@
+#!/bin/bash
+
+STATUS=$1
+IFACE=$2
+
+case "$STATUS" in
+  session.up)
+    echo "Received 'session.up' for interface ${IFACE}"
+
+    ip link set $IFACE up
+    ip addr add {{ mesh_addr }}/32 dev $IFACE
+    systemctl restart babeld
+
+    ;;
+  session.down)
+    echo "Received 'session.down' for interface ${IFACE}"
+    systemctl stop babeld
+
+
+    ;;
+esac

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+STATUS=$1
+IFACE=$2
+
+case "$STATUS" in
+  session.up)
+    echo "Received 'session.up' for interface ${IFACE}"
+
+    ip link set $IFACE up
+    ip addr add {{mesh_addr}}/{{mesh_subnet}} dev $IFACE
+    babeld -a $IFACE
+
+    ;;
+  session.down)
+    echo "Received 'session.down' for interface ${IFACE}"
+
+    ;;
+esac
