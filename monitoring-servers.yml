@@ -1,0 +1,18 @@
+# file: monitoring-servers.yml
+- hosts: monitoring-servers
+  roles:
+    - role: maxb.smokeping
+      tags: smokeping
+    - role: tunneldigger
+      tags: tunneldigger
+    - role: babeld
+      tags: babeld
+    - role: maxb.collectd
+      collectd_plugins_custom: "{{
+        collectd_plugins_snmp
+      }}"
+      collectd_plugins_snmp:
+        - options:
+          - LoadPlugin: snmp
+      collectd_config_path: /etc/collectd/collectd.conf
+      tags: collectd
