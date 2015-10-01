@@ -1,0 +1,12 @@
+[Unit]
+Description=Babeld Daemon
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/babeld -c /etc/babeld.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

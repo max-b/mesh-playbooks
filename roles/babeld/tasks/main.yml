@@ -1,0 +1,32 @@
+---
+
+- name: Install build tools
+  apt: pkg={{ item  }} state=present force=yes
+  with_items:
+    - build-essential
+
+- name: Clone babeld repo
+  git: repo=https://github.com/sudomesh/babeld.git
+       force=yes
+       dest=/opt/babeld
+
+- name: Compile babeld
+  command: creates=/usr/local/bin/babeld chdir=/opt/babeld/ make install
+
+- name: Create babeld service file
+  template: dest=/lib/systemd/system/babeld.service
+            src=babeld.service.j2
+            force=yes
+            mode=0644
+  tags: create-systemd
+
+- name: Create babeld conf file
+  template: dest=/etc/babeld.conf
+            src=babeld.conf.j2
+            force=yes
+            mode=0644
+  tags: babeld-conf
+  notify:
+    - restart babeld service
+
+

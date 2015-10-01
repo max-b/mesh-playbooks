@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Maxb 
+  description: Ansible role that sets installs/sets up babeld
+  license: GPLv3
+  min_ansible_version: 1.4
+  platforms:
+    - name: Debian
+      versions:
+      - jessie
+  categories:
+    - networking
+    - cloud
+dependencies: []
