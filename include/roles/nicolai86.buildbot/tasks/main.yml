@@ -1,0 +1,29 @@
+---
+# install buildbot + dependencies
+- include: installation.yml
+
+# jail configuration
+- name: add buildbot user
+  user:
+    name: "{{ buildbot_user }}"
+    home: "{{ buildbot_home }}"
+    shell: /bin/bash
+    createhome: yes
+
+- name: create buildbot master directory
+  file:
+    path: "{{ buildbot_home }}/master"
+    state: directory
+    owner: "{{ buildbot_user }}"
+    group: "{{ buildbot_user }}"
+
+- name: create buildbot slave directories
+  file:
+    path: "{{ buildbot_home }}/slaves/{{ item.name }}"
+    state: directory
+    owner: "{{ buildbot_user }}"
+    group: "{{ buildbot_user }}"
+  with_items: "{{ buildbot_slaves }}"
+
+# initialize master + slaves
+- include: initialization.yml

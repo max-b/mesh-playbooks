@@ -1,0 +1,52 @@
+---
+- name: Install build tools
+  apt: pkg={{ item  }} state=present force=yes
+  with_items:
+    - build-essential 
+    - subversion 
+    - git-core 
+    - libncurses5-dev 
+    - zlib1g-dev 
+    - gawk 
+    - flex 
+    - quilt 
+    - libssl-dev 
+    - xsltproc 
+    - libxml-parser-perl 
+    - mercurial 
+    - bzr 
+    - ecj 
+    - cvs 
+    - unzip
+
+- name: Add sudowrt-builder user
+  user: name=sudowrt-builder shell=/bin/bash createhome=yes
+
+- name: Clone sudowrt repo
+  git: repo=https://github.com/sudomesh/sudowrt-firmware.git
+       force=yes
+       dest=/home/sudowrt-builder/sudowrt-firmware
+       version=maxb/path-fix
+  become: yes
+  become_method: sudo
+  become_user: sudowrt-builder
+
+- name: Build ar71xx home node
+  command: ./build ar71xx
+           chdir=/home/sudowrt-builder/sudowrt-firmware
+  become: yes
+  become_method: sudo
+  become_user: sudowrt-builder
+  tags: build-ar71xx-home
+  async: 18000 #wait 5hrs to build - to insure no timeouts
+  poll: 30
+
+- name: Build ar71xx extender node
+  command: ./build_extender-node ar71xx
+           chdir=/home/sudowrt-builder/sudowrt-firmware
+  become: yes
+  become_method: sudo
+  become_user: sudowrt-builder
+  tags: build-ar71xx-extender
+  async: 18000 #wait 5hrs to build - to insure no timeouts
+  poll: 30

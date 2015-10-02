@@ -1,0 +1,26 @@
+---
+smk_owner : OwnerName
+smk_contact : Contact@email.com
+smk_mailhost : localhost
+
+smokeping_groups:
+  - 
+    name: 'group1'
+    title: 'group1'
+    menu: 'group1'
+    hosts:
+    - 
+      name: 'host1'
+      menu: 'host1'
+      title: 'host1'
+      host: '10.1.1.1'
+    - 
+      name: 'host2'
+      menu: 'host2'
+      title: 'host2'
+      host: '10.1.1.2'
+    -
+      name: 'host3'
+      menu: 'host3'
+      title: 'host3'
+      host: '10.1.1.3'

@@ -1,0 +1,97 @@
+---
+
+# ---- MySQL server configuration ----
+
+# Bind address of mysqld. If you want to allow access to the server over the
+# network, change this to '0.0.0.0' (for all interfaces) or for specific IP
+# address to bind on
+mysql_mysqld_bind_address: 'localhost'
+
+# Default mysqld port to listen on
+mysql_mysqld_port: 3306
+
+# This is a list of IP addresses or CIDR networks allowed to connect to MySQL
+# server from remote hosts. It will be applied in firewall (ferm) and
+# /etc/hosts.allow (tcpwrappers).
+# You will need to set mysql_mysqld_bind_address to 0.0.0.0 and restart MySQL
+# server for it to listen on all network interfaces.
+mysql_mysqld_allow: []
+
+# Maximum number of allowed connections
+mysql_mysqld_max_connections: 100
+
+# Use this hash variable to set additional mysqld options
+mysql_mysqld_options: {}
+#  'key_buffer': '16M'
+#  'skip-name-resolve':
+
+# List of additional system groups to append to the MySQL system user
+# 'ssl-cert' group is required for access to certificate private keys
+mysql_mysqld_append_groups: [ 'ssl-cert' ]
+
+
+# ---- Encrypted connections ----
+
+# Enable or disable support for TLS in MySQL (using debops.pki)
+mysql_pki: True
+
+# Base path for PKI directory
+mysql_pki_path: '{% if (ansible_local is defined and ansible_local.pki is defined) %}{{ ansible_local.pki.base_path }}{% else %}/etc/pki{% endif %}'
+
+# Default PKI realm used by MySQL (Debian MySQL packages do not support chained
+# certificates, see Debian Bug #630625)
+mysql_pki_realm: 'service'
+
+# Default CA, certificate and private key used by MySQL, relative to
+# 'mysql_pki_realm' variable
+mysql_pki_ca: 'CA.crt'
+mysql_pki_crt: 'default.crt'
+mysql_pki_key: 'default.key'
+
+# Cipher suite used for encrypted connections
+mysql_pki_cipher: 'DHE-RSA-AES256-SHA'
+
+
+# ---- PHPMyAdmin support ----
+
+# Enable PHPMyAdmin? It will be installed on localhost with php5-fpm and nginx
+# See 'phpmyadmin' role for more configuration options
+mysql_phpmyadmin: False
+
+
+# ---- automysqlbackup configuration ----
+
+# Mail address to send messages to (account or alias name will be properly
+# routed by the Postfix SMTP server)
+mysql_backup_mailaddr: 'backup'
+
+# Specify the day of the week to create weekly backups (1 - Monday, 7 - Sunday)
+mysql_backup_doweekly: '6'
+
+# Don't keep copies of most recent backups by default
+mysql_backup_latest: 'no'
+
+
+# ---- MySQL databases and user accounts ----
+
+# List of MySQL databases to manage
+mysql_databases: []
+  #- name: 'database_name'
+  #  state: 'present,absent'        # optional
+
+# Length of randomly generated passwords (it's a string)
+mysql_password_length: '20'
+
+# Password for MySQL root user
+mysql_root_password: "{{ lookup('password', secret + '/credentials/' + ansible_fqdn + '/mysql/root/password length=' + mysql_password_length) }}"
+
+# List of MySQL users to manage (defaults first)
+mysql_users: []
+  #- name: 'user_name'              # required
+  #  host: 'localhost'
+  #  state: 'present,absent'
+  #  password: ''                   # if not specified, random will be generated
+  #                                 # and saved in the 'secret' storage
+  #  priv: 'user_name.*:ALL'
+  #  append_privs: 'no,yes'
+

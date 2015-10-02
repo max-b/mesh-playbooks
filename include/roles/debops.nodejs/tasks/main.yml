@@ -1,0 +1,31 @@
+---
+# role: nodejs - server-side JavaScript application stack
+# Homepage: http://nodejs.org/
+
+# nodejs and npm install based on code from https://github.com/f500/ansible-nodejs
+# As of spring 2015, these articles suggest a different approach:
+# https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions
+# https://nodesource.com/blog/nodejs-v012-iojs-and-the-nodesource-linux-repositories
+#
+
+
+- name: Add Nodejs v0.10 repo
+  shell: curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+  when: node_version|d() and node_version=='0.10'
+
+- name: Add Nodejs ppa
+  shell: curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+  when: not node_version or node_version|d() and node_version=='0.12'
+
+- name: Install Nodejs
+  apt: name=nodejs update_cache=yes force=yes
+
+- name: Get npm global temporary directory
+  command: npm -g config get tmp
+  register: nodejs_npm_tempdir
+  changed_when: False
+
+- name: Set npm global temporary directory to /tmp
+  command: npm -g config set tmp /tmp
+  when: nodejs_npm_tempdir.stdout != '/tmp'
+

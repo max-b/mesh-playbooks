@@ -1,0 +1,137 @@
+---
+
+- name: DebOps pre_tasks hook
+  include: "{{ lookup('task_src', 'mysql/pre_main.yml') }}"
+
+# ---- Install and configure MySQL server ----
+
+  # We want to have our configuration enabled as soon as possible for UTF-8
+  # support, this check lets us know if MySQL server has just been installed
+  # and we can quicky apply our own configuration and restart the server before
+  # any more changes.
+- name: Check if MySQL server is installed
+  stat:
+    path: '/usr/bin/mysqld_safe'
+  register: mysql_installed
+
+- name: Install MySQL-related packages
+  apt:
+    name: '{{ item }}'
+    state: 'latest'
+    install_recommends: False
+  register: mysql_install_status
+  with_items: [ 'python-mysqldb', 'mysql-server', 'automysqlbackup', 'ssl-cert' ]
+
+- name: Add MySQL system user to specified groups
+  user:
+    name: 'mysql'
+    groups: '{{ mysql_mysqld_append_groups | join(",") | default(omit) }}'
+    append: True
+    createhome: False
+  when: mysql_pki is defined and mysql_pki
+  notify: [ 'Restart mysql' ]
+
+- name: Apply /etc/mysql/conf.d/mysqld.cnf configuration
+  template:
+    src: 'etc/mysql/conf.d/mysqld.cnf.j2'
+    dest: '/etc/mysql/conf.d/mysqld.cnf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Reload mysql' ]
+
+- name: Apply /etc/mysql/conf.d/client.cnf configuration
+  template:
+    src: 'etc/mysql/conf.d/client.cnf.j2'
+    dest: '/etc/mysql/conf.d/client.cnf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Reload mysql' ]
+
+- name: Restart MySQL service on first install
+  service:
+    name: 'mysql'
+    state: 'restarted'
+  when: ((mysql_installed is defined and not mysql_installed.stat.exists) and
+         (mysql_install_status is defined and mysql_install_status.changed))
+
+
+# ---- Secure MySQL installation ----
+
+- name: Update mysql root password for all root accounts
+  mysql_user:
+    name: 'root'
+    host: '{{ item }}'
+    password: '{{ mysql_root_password }}'
+  with_items: [ '{{ ansible_hostname }}', '127.0.0.1', '::1', 'localhost' ]
+
+- name: Create /root/.my.cnf file with root password credentials
+  template:
+    src: 'root/my.cnf.j2'
+    dest: '/root/.my.cnf'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+
+- name: Delete anonymous mysql user
+  mysql_user:
+    user: ""
+    host: '{{ item }}'
+    state: 'absent'
+  with_items: [ '{{ ansible_hostname }}', 'localhost' ]
+
+- name: Remove test database
+  mysql_db:
+    db: 'test'
+    state: 'absent'
+
+
+# ---- Configure MySQL database backup ----
+
+- name: Setup automysqlbackup configuration
+  template:
+    src: 'etc/default/automysqlbackup.j2'
+    dest: '/etc/default/automysqlbackup'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: Create mysqldump section in /etc/mysql/debian.cnf
+  lineinfile:
+    regexp: '^\[mysqldump\]'
+    dest:   '/etc/mysql/debian.cnf'
+    line:   '[mysqldump]'
+    state:  'present'
+
+- name: Enable events table backup in mysqldump
+  lineinfile:
+    insertafter: '[mysqldump]'
+    regexp: '^events\s'
+    dest:   '/etc/mysql/debian.cnf'
+    line:   'events = true'
+    state:  'present'
+
+
+# ---- Manage MySQL databases and users ----
+
+- name: Manage MySQL databases
+  mysql_db:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") }}'
+  with_items: mysql_databases
+  when: item.name is defined and item.name
+
+- name: Manage MySQL users
+  mysql_user:
+    name: '{{ item.name }}'
+    password: '{{ item.password | default(lookup("password", secret + "/credentials/" + ansible_fqdn + "/mysql/" + item.name + "/password length=" + mysql_password_length)) }}'
+    state: '{{ item.state | default("present") }}'
+    priv: '{{ item.priv | default(item.name + ".*:ALL") }}'
+    append_privs: '{{ item.append_privs | default("no") }}'
+    host: '{{ item.host | default("localhost") }}'
+  with_items: mysql_users
+  when: (item.name is defined and item.name)
+
+- name: DebOps post_tasks hook
+  include: "{{ lookup('task_src', 'mysql/post_main.yml') }}"

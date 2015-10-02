@@ -1,0 +1,33 @@
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency Grapher
+remark = Welcome to the SmokePing website of xxx Company. \
+         Here you will learn all about the latency of our network.
+
+
++ Hosts
+menu = All_Hosts
+title = All Hosts
+
+{% for sm_group in smokeping_groups %}  
+
+++ {{sm_group['name']}}
+
+menu = {{sm_group['menu']}}
+title = {{sm_group['title']}}
+
+{% for entry in sm_group['hosts'] %}
+
++++ {{entry['name']}}
+menu = {{entry['menu']}}
+title = {{entry['title']}}
+host = {{entry['host']}}
+
+{% endfor %}
+{% endfor %}
+
+
+

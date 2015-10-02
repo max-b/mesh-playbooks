@@ -23,7 +23,6 @@ When you come back to work on it, you can just cd into the folder and then:
 source ./venv/bin/activate
 ```
 
-
 # Configuration
 
 Copy `./hosts.sample` to `./hosts`
@@ -44,18 +43,13 @@ network_ether_interfaces:
 ```
 REMEMBER THAT THESE CHANGES HAVE THE POSSIBILITY OF LOCKING YOU OUT!
 
-## Librarian-Ansible
+## Ansible Galaxy
 
-I found that using librarian-ansible was a decent way to consume other folks more elaborate playbooks. 
-It is a ruby gem, and the Gemfile is under /ruby, but I'm crossing my fingers that there won't really be a need to 
-tinker with it too much.
-
-To install playbooks in your Ansiblefile with verbose debug output, use:
-```
-librarian-ansible install --verbose
-```
-
-You'll likeley have to set up the librarian-install gem, which I'm afraid you're on your own with...
+I was using librarian-ansible for a while, but I've since switched to ansible galaxy. 
+Galaxy roles are listed in `install_roles.yml`. 
+I've already just checked in all of the dependencies into this repo, but if you wanted to add a new role, you could
+append it to the `install_roles.yml` file and then run `ansible-galaxy -r install_roles.yml`. 
+I assume that's also the upgrade process....
 
 
 # Usage
@@ -75,10 +69,14 @@ If you'd like to only run certain playbooks, you can use filter rules like:
 
 ### Setting up access
 
-You'll first need to find the ip address of the server. There are a variety of ways of doing this, including running
+#### Embedded devices
+
+You'll first need to find the ip address of the host. There are a variety of ways of doing this, including running
 dnsmasq on your own host machine, but it will also work perfectly fine if you just connect the ethernet port of the server to a 
 server that provides dhcp leases. The only trick is finding the ip address of the host that's gotten the dhcp lease. Generally, with
 openwrt, you can `cat /tmp/dhcp.leases` which will show you the ip address of the new host.
+
+Obviously, for running on a cloud server (like DigitalOcean), you'll have a public IP address and this won't be a concern.
 
 Once you have the ip address, you should copy your public key over to the host. Assuming that the ip address is 100.64.2.204, you'd want to do something like this:
 ```
@@ -93,6 +91,8 @@ Now you can login as root without a password.
 ### Bootstrapping Ansible client requirements
 
 This will install the base Ansible client requirements 
+I believe this may only be necessary for embedded devices, 
+but it can't hurt either way
 ```
 ansible-playbook -i hosts bootstrapped.yml -vvvv
 ```
@@ -115,7 +115,43 @@ After you've setup the hostname+domain name, you can use it in your ./hosts inve
 You could use:
 `my-hostname ansible_ssh_host=my-hostname.sudomesh.org ansible_ssh_user=root`
 
-### Installing the good stuff
+### Setting up a build Server ###
+
+At the moment, we have a working, if rough, playbook for deploying a build server. 
+It only currently supports Ubuntu 12.04!
+
+`build-servers.yml` has the following roles listed:
+- sudowrt_firmware
+- nicolai86.buildbot
+- debops.nginx
+
+The sudowrt_firmware is currently working. Buildbot does not work at all and is only included as a work in progress.
+Nginx is a convenient thing to install as you can then host the firmwares.
+
+The great thing is that you don't have to run any more of these roles than you'd like because tags allow you to 
+specify just the item you'd like to run. For example, this would run the sudowrt-firmware role for any host in 
+the build-servers group.
+
+`ansible-playbook -i hosts build-servers.yml -vvvv  --tags "sudowrt-firmware"`
+
+If you only wanted to run the role on one host named build1, you could do:
+
+`ansible-playbook -i hosts -l build1 build-servers.yml -vvvv  --tags "sudowrt-firmware"`
+
+Or if for whatever reason you only want to run the build script for the extender nodes 
+(perhaps there was a failure and you want to start over from a later point), you could:
+
+`ansible-playbook -i hosts -l build1 build-servers.yml -vvvv  --tags "build-ar71xx-extender"`
+
+ 
+To set up nginx, you would run
+
+`ansible-playbook -i hosts build-servers.yml -vvvv  --tags "nginx-install"`
+
+That will create a web root at `/srv/www/sites` with site directory listing on. For the time being, you'll have to copy
+the built firmware images yourself. We'll get there :)
+
+### Installing fun stuff
 
 From here we should be able to install owncloud and etherpad-lite and our monitoring services.
 

@@ -1,0 +1,99 @@
+# install_roles/.yml
+
+ - src: bennojoy.network_interface
+   path: include/roles/
+
+ - src: https://github.com/knopki/ansible-hostname
+   name: hostname
+   path: include/roles/
+
+ - src: https://github.com/Oefenweb/ansible-apt
+   name: oefenweb.apt
+   path: include/roles/
+
+ - src: https://github.com/max-b/ansible-smokeping
+   version: maxb
+   name: maxb.smokeping
+   path: include/roles/
+
+ - src: https://github.com/max-b/ansible-collectd
+   name: maxb.collectd
+   path: include/roles/
+   version: maxb
+
+ - src: https://github.com/max-b/ansible-owncloud
+   name: maxb.owncloud
+   path: include/roles/
+   version: maxb
+
+ - src: https://github.com/max-b/mysql
+   name: maxb.mysql
+   path: include/roles/
+   version: maxb
+
+ - src: https://github.com/max-b/ansible-nodejs
+   name: debops.nodejs
+   path: include/roles/
+   version: origin/maxb
+
+ - src: debops.snmpd
+   name: debops.snmpd
+   path: include/roles/
+
+ - src: https://github.com/max-b/debops-owncloud
+   name: debops.owncloud
+   version: master
+   path: include/roles/
+
+ - src: debops.apt
+   name: debops.apt
+   path: include/roles/
+
+ - src: debops.postgresql
+   name: debops.postgresql
+   path: include/roles/
+
+ - src: debops.php5
+   name: debops.php5
+   path: include/roles/
+
+ - src: debops.ferm
+   name: debops.ferm
+   path: include/roles/
+
+ - src: debops.secret
+   name: debops.secret
+   path: include/roles/
+
+ - src: debops.apt_preferences
+   name: debops.apt_preferences
+   path: include/roles/
+
+ - src: debops.tcpwrappers
+   name: debops.tcpwrappers
+   path: include/roles/
+
+ - src: debops.etc_services
+   name: debops.etc_services
+   path: include/roles/
+
+ - src: debops.mysql
+   name: debops.mysql
+   path: include/roles/
+
+ - src: debops.nginx
+   name: debops.nginx
+   path: include/roles/
+
+ - src: https://github.com/max-b/ansible-etherpad
+   name: debops.etherpad
+   path: include/roles/
+   version: maxb
+
+ - src: nicolai86.buildbot
+   name: nicolai86.buildbot
+   path: include/roles/
+
+ - src: https://github.com/sudomesh/ansible-sudowrt-firmware
+   name: sudowrt_firmware
+   path: include/roles/

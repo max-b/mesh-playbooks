@@ -1,0 +1,73 @@
+---
+- name: Add universe repo
+  apt_repository: repo='deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} universe' state=present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add ownCloud repo for Ubuntu
+  apt_repository: repo='deb http://download.opensuse.org/repositories/isv:/ownCloud:/community/xUbuntu_{{ ansible_distribution_version }}/ /' state=present update_cache=yes
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= 12
+
+- name: Add ownCloud repo for Debian
+  apt_repository: repo='deb http://download.opensuse.org/repositories/isv:/ownCloud:/community/Debian_{{ ansible_distribution_major_version }}.0/ /' state=present update_cache=yes
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version >= 7
+
+- name: Add ownCloud repo key for Ubuntu
+  apt_key: url='http://download.opensuse.org/repositories/isv:ownCloud:community/xUbuntu_{{ ansible_distribution_version }}/Release.key' state=present
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= 12
+
+- name: Add ownCloud repo key for Debian
+  apt_key: url='http://download.opensuse.org/repositories/isv:ownCloud:community/Debian_{{ ansible_distribution_major_version }}.0/Release.key' state=present
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version >= 7
+
+- name: Install dependencies
+  apt: pkg={{ item }} state=present
+  with_items:
+    - php-xml-parser
+    - php5-intl
+    - php5-mcrypt
+    - curl
+    - exim4
+    - php5-imagick
+    - php-apc
+
+- name: Install ownCloud
+  apt: name=owncloud state=present force=yes
+
+- name: Remove default apache sites-enabled config 
+  file: dest=/etc/apache2/sites-enabled/000-default state=absent
+
+- name: Add owncloud sites-available config 
+  template: src=apache-owncloud dest=/etc/apache2/sites-available/owncloud 
+  notify: reload apache
+
+- name: Symlink apache owncloud sites-available to sites-enabled
+  file: src=/etc/apache2/sites-available/owncloud dest=/etc/apache2/sites-enabled/owncloud state=link
+  notify: reload apache
+
+- name: ensure owncloud database is present
+  mysql_db:
+    name: owncloud
+
+- name: ensure owncloud database user is present
+  mysql_user:
+    name: owncloud
+    host: "{{ item }}"
+    password: "{{ owncloud_owncloud_mysql_password }}"
+    priv: owncloud.*:ALL
+  with_items:
+    - "%"
+    - localhost
+
+- name: update owncloud/config/autoconfig.php from template
+  template:
+    src: autoconfig.php
+    dest: /var/www/owncloud/config/autoconfig.php
+
+
+- name: Add mount path if not there
+  file: path={{ owncloud_owncloud_data_dir}} state=directory owner=www-data group=www-data
+  when: owncloud_mount_drive
+
+- name: Add mounted drive if appropriate
+  mount: name={{ owncloud_owncloud_data_dir }} src='LABEL={{ owncloud_drive_label }}' opts='defaults,rw' fstype={{ owncloud_drive_fstype}} state=present
+  when: owncloud_mount_drive
