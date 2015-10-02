@@ -12,7 +12,7 @@ git clone https://github.com/max-b/mesh-playbooks.git
 cd mesh-playbooks
 virtualenv venv
 source ./venv/bin/activate
-pip install < requirements.txt
+pip install -r requirements.txt
 ```
 
 You can then use commands like `ansible` or `ansible-playbook` on the command line in that directory.
