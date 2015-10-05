@@ -1,0 +1,11 @@
+hostname_name: "build1"
+hostname_domain: "sudomesh.org"
+tcpwrappers_deny_all: false
+
+network_ether_interfaces:
+ - device: eth0
+   bootproto: static
+   address: IP_ADDRESS
+   netmask: NETMASK
+   gateway: GATEWAY
+

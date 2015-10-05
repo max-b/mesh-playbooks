@@ -1,0 +1,39 @@
+---
+# file: group_vars/build-servers
+nginx_default_index_html: |
+  <html>
+    <head>
+      <title>Sudomesh Builds</title>
+    </head>
+    <body>
+      <h1><a href="/builds">Sudomesh Builds</a></h1>
+    </body>
+  </html>
+
+# Default nginx site
+# List and description of available parameters can be found in nginx server
+# templates: templates/etc/nginx/sites-available/*.conf.j2
+nginx_server_default:
+  enabled: True
+  name: ['{{ansible_fqdn}}']
+  default_index: '{{ nginx_default_index_html }}'
+  listen: ['80']
+  location: 
+    '/builds': 'autoindex on;'
+
+
+# nginx base path for website directories
+# It is exposed using Ansible local facts as 'ansible_local.nginx.www'
+nginx_root_www_path: '/srv/www'
+
+# Default server root
+nginx_default_root: '{{ nginx_root_www_path + "/sites/default/public" }}'
+
+# Create global webroot directories?
+# Path: /srv/www/sites/*/public
+nginx_webroot_create: True
+nginx_webroot_owner: 'www-data'
+nginx_webroot_group: 'www-data'
+nginx_webroot_mode: '0755'
+
+

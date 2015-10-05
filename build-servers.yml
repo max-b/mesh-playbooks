@@ -1,0 +1,9 @@
+# file: build-servers.yml
+- hosts: build-servers
+  roles:
+    - role: sudowrt_firmware
+      tags: sudowrt-firmware
+    - role: nicolai86.buildbot
+      tags: buildbot-install
+    - role: debops.nginx
+      tags: nginx-install
