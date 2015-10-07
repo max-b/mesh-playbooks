@@ -21,7 +21,6 @@
   git: repo=https://github.com/sudomesh/tunneldigger.git
        force=yes
        dest=/opt/tunneldigger
-       version=maxb/merge-fix #TODO - this should eventually be replaced with MASTER
 
 - name: Compile tunneldigger
   command: creates=/opt/tunneldigger/client/l2tp_client chdir=/opt/tunneldigger/client make l2tp_client
