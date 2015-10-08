@@ -43,6 +43,12 @@
             mode=0644
   tags: create-systemd
 
+- name: Enable tunneldigger-client
+  service: name=tunneldigger-client
+           enabled=yes
+  when: tunneldigger_client_enabled
+
+
 - name: Ensure that hook path exists
   file: path={{ up_hook_script_path }} state=directory
   tags: create-hook

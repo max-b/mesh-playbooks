@@ -3,12 +3,16 @@
   gather_facts: True
   roles:
     - role: oefenweb.apt
+      apt_manage_sources_list: true
+      apt_upgrade: false
+      apt_update: true
+      apt_debian_contrib_nonfree_enable: true
       tags: ['apt-configure', 'snmpd-configure']
     - role: debops.secret
       tags: setup-secrets
     - role: debops.snmpd
       snmpd_allow: [ "{{mesh_subnet}}" ]
       tcpwrappers_deny_all: false
-      no_log: False
+      no_log: false
       tags: ['snmpd-configure']
 

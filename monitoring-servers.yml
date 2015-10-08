@@ -3,8 +3,8 @@
   roles:
     - role: maxb.smokeping
       tags: smokeping
-    - role: tunneldigger
-      tags: tunneldigger
+    - role: tunneldigger-client
+      tags: tunneldigger-client
     - role: babeld
       tags: babeld
     - role: maxb.collectd

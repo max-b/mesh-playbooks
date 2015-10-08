@@ -20,6 +20,12 @@
             mode=0644
   tags: create-systemd
 
+- name: Enable babeld service
+  service: name=babeld
+           enabled=yes
+  when: enable_babeld is not undefined and enable_babeld
+
+
 - name: Create babeld conf file
   template: dest=/etc/babeld.conf
             src=babeld.conf.j2

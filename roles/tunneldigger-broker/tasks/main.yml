@@ -1,0 +1,69 @@
+---
+
+- name: apt-get update
+  apt: update_cache=yes
+  when: skip_apt_update is undefined
+
+- name: apt-get things
+  apt: pkg={{ item  }} state=present force=yes
+  with_items:
+    - git
+    - python-dev
+    - python-pip
+    - iproute 
+    - bridge-utils
+    - libnetfilter-conntrack3 
+    - libevent-dev
+    - ebtables
+    - openssl
+
+- name: Clone tunneldigger repo
+  git: repo=https://github.com/sudomesh/tunneldigger.git
+       force=yes
+       dest=/opt/tunneldigger
+
+- name: pip install virtualenv
+  pip: name=virtualenv
+
+- name: pip install tunneldigger
+  pip: requirements=/opt/tunneldigger/broker/requirements.txt
+       virtualenv=/opt/tunneldigger/broker/venv
+
+- name: Init required kernel modules
+  command: "modprobe {{ item }}"
+  with_items:
+    - nf_conntrack_netlink 
+    - nf_conntrack 
+    - nfnetlink 
+    - l2tp_netlink 
+    - l2tp_core 
+    - l2tp_eth
+  tags: modprobe
+
+- name: Create systemd service file
+  template: dest=/lib/systemd/system/tunneldigger-broker.service
+            src=tunneldigger-broker.service.j2
+            force=yes
+            mode=0644
+  tags: create-systemd
+
+- name: Enable tunneldigger-broker
+  service: name=tunneldigger-broker
+           enabled=yes
+  when: tunneldigger_broker_enabled
+
+- name: Create hook file
+  template: dest=/opt/tunneldigger/broker/scripts/tunnel-up-hook.sh
+            src=tunnel-up-hook.sh.j2
+            force=yes
+            mode=0755
+  tags: create-hook
+
+- name: Create config file
+  template: dest=/opt/tunneldigger/broker/l2tp_broker.cfg 
+            src=l2tp_broker.cfg.j2
+            force=yes
+            mode=0644
+  tags: create-defaults
+  notify:
+    - restart tunneldigger service

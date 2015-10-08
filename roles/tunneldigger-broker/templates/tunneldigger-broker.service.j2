@@ -1,0 +1,13 @@
+[Unit]
+Description=Tunneldigger L2TPv3 broker daemon
+After=syslog.target
+
+[Service]
+EnvironmentFile=-/etc/default/tunneldigger-broker
+ExecStart=/opt/tunneldigger/broker/venv/bin/python /opt/tunneldigger/broker/l2tp_broker.py /opt/tunneldigger/broker/l2tp_broker.cfg
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

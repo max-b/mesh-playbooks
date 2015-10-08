@@ -1,0 +1,5 @@
+---
+- name: restart tunneldigger service
+  service:
+    name: tunneldigger-broker
+    state: restarted

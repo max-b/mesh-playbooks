@@ -1,0 +1,34 @@
+---
+# file: group_vars/monitoring-servers
+tunneldigger_broker_ip: 104.236.181.226
+tunneldigger_broker_port: 8942
+tunnel_interface: l2tp1
+up_hook_script_path: /opt/tunneldigger/client/scripts/
+up_hook_script_name: up-hook.sh
+
+enable_babeld = true
+
+babel_interfaces: 
+ - "{{ tunnel_interface }}"
+
+babel_filter_rules:
+ - "redistribute local ip {{ mesh_addr }}/{{ mesh_mask }}"
+ - "redistribute local deny"
+
+smokeping_groups:
+  - 
+    name: 'mesh_nodes'
+    title: 'mesh_nodes'
+    menu: 'mesh_nodes'
+    hosts:
+    - 
+      name: 'MaxbTpLink4300_1'
+      menu: 'MaxbTpLink4300_1 100.64.4.1'
+      title: 'MaxbTpLink4300_1 100.64.4.1'
+      host: '100.64.4.1'
+    - 
+      name: 'Maxb_MyNet_N750'
+      menu: 'Maxb MyNet N750 100.64.3.129'
+      title: 'Maxb MyNet N750 100.64.3.129'
+      host: '100.64.3.129'
+    

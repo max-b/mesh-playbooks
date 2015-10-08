@@ -1,3 +1,6 @@
-redistribute local ip {{mesh_addr}}/{{mesh_subnet}}
-redistribute local deny
-interface {{ tunnel_interface }}
+{% for interface in babel_interfaces %}
+interface {{ interface }}
+{% endfor %}
+{% for rule in babel_filter_rules %}
+{{ rule }}
+{% endfor %}

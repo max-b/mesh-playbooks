@@ -1,0 +1,21 @@
+---
+# file: group_vars/exit-servers
+tunneldigger_broker_enabled: true
+tunneldigger_broker_port: 8942
+up_hook_script_path: /opt/tunneldigger/broker/scripts/
+up_hook_script_name: tunnel-up-hook.sh
+
+enable_babeld = true
+
+babel_interfaces: 
+ - l2tp0
+
+babel_filter_rules:
+ - "redistribute local ip 0.0.0.0/0 proto 3 metric 128 allow"
+ - "redistribute local ip {{ network_ether_interfaces[0].address }}/{{ network_ether_interfaces[0].cidr }} proto 0 deny"
+ - "redistribute ip {{ mesh_net }} metric 128 allow"
+ - "in ip {{ mesh_net }} allow"
+ - "redistribute local ip {{ mesh_net }} metric 128 allow"
+ - "redistribute local deny"
+ - "in local deny"
+ - "in deny"

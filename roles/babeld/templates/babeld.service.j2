@@ -3,7 +3,7 @@ Description=Babeld Daemon
 After=syslog.target
 
 [Service]
-ExecStart=/usr/local/bin/babeld -c /etc/babeld.conf
+ExecStart=/usr/local/bin/babeld -F -c /etc/babeld.conf
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=on-failure

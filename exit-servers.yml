@@ -1,0 +1,7 @@
+# file: exit-servers.yml
+- hosts: exit-servers
+  roles:
+    - role: tunneldigger-broker
+      tags: tunneldigger-broker
+    - role: babeld
+      tags: babeld
