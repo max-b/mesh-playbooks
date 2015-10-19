@@ -13,6 +13,7 @@
     name: '{{ item }}'
     state: 'present'
     install_recommends: False
+    update_cache: True
   with_flattened:
     - [ 'snmp', 'snmpd', 'snmp-mibs-downloader' ]
     - [ '{{ "snmp-mibs-downloader" if snmpd_download_mibs else [] }}' ]

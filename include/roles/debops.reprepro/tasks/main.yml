@@ -1,0 +1,12 @@
+---
+
+- include: configure_reprepro.yml
+
+- include: configure_gnupg.yml
+
+- include: reprepro_init.yml
+
+- include: configure_inoticoming.yml
+
+- include: snapshot_gnupg.yml
+

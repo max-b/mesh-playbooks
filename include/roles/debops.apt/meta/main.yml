@@ -3,9 +3,12 @@
 dependencies:
 
   - role: debops.secret
+    tags: [ 'depend::secret', 'depend::secret:apt',
+            'depend-of::apt', 'type::dependency:hard' ]
 
   - role: debops.apt_preferences
-    tags: apt_preferences
+    tags: [ 'depend::apt_preferences', 'depend::apt_preferences:apt',
+            'depend-of::apt', 'type::dependency:hard' ]
     apt_preferences_dependent_list:
 
       - package: 'git git-*'
@@ -16,6 +19,11 @@ dependencies:
       - package: 'irqbalance'
         backports: [ 'wheezy' ]
         reason:  'Issues in wheezy package - http://debian.distrosfaqs.org/debian-user/wheezy-irqbalance/'
+        by_role: 'debops.apt'
+
+      - package: 'apt-cacher-ng'
+        backports: [ 'jessie' ]
+        reason:  'http://httpredir.debian.org/debian is not included in the deb_mirrors.gz file of apt-cacher-ng as of 0.8.0-3 (latest in Debian Jessie). This can results in unnecessary resource (bandwidth, storage) usage.'
         by_role: 'debops.apt'
 
 

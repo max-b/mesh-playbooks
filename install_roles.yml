@@ -36,7 +36,7 @@
    path: include/roles/
    version: origin/maxb
 
- - src: debops.snmpd
+ - src: https://github.com/max-b/ansible-snmpd
    name: debops.snmpd
    path: include/roles/
 
@@ -59,6 +59,14 @@
 
  - src: debops.ferm
    name: debops.ferm
+   path: include/roles/
+
+ - src: debops.reprepro
+   name: debops.reprepro
+   path: include/roles/
+
+ - src: cmprescott.dnsmasq
+   name: cmprescott.dnsmasq
    path: include/roles/
 
  - src: debops.secret

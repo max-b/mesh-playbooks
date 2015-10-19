@@ -26,7 +26,6 @@
   git: repo=https://github.com/sudomesh/sudowrt-firmware.git
        force=yes
        dest=/home/sudowrt-builder/sudowrt-firmware
-       version=master
   become: yes
   become_method: sudo
   become_user: sudowrt-builder
