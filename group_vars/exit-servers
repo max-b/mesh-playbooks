@@ -2,13 +2,23 @@
 # file: group_vars/exit-servers
 tunneldigger_broker_enabled: true
 tunneldigger_broker_port: 8942
-up_hook_script_path: /opt/tunneldigger/broker/scripts/
-up_hook_script_name: tunnel-up-hook.sh
+up_hook_script_path: "/opt/tunneldigger/broker/scripts/"
+up_hook_script_name: "tunnel-up-hook.sh"
 
-enable_babeld = true
+dnsmasq_dns_interfaces: [ "except-interface=eth0" ] 
+dnsmasq_dns_domains: [ "domain=sudomesh.org" ] 
+dnsmasq_dns_hosts: 
+ - "expand-hosts" 
+ - "host-record=maxb-banana-pi.sudomesh.org,100.64.3.140" 
+ - "host-record=monitor.sudomesh.org,100.64.0.10"
+ #- "addn-hosts=/etc/hosts.sudomesh" # TODO: Fails if /etc/hosts.sudomesh doesn't exist! What a surprise!
+ 
+subnetwork_ipv4: "{{ mesh_net }}"
+subnetwork_ipv4_nat: True
+subnetwork_ipv4_nat_masquerade: True
 
-babel_interfaces: 
- - l2tp0
+enable_babeld: true
+babel_interfaces: ["l2tp0"]
 
 babel_filter_rules:
  - "redistribute local ip 0.0.0.0/0 proto 3 metric 128 allow"

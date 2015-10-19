@@ -1,7 +1,14 @@
 # file: exit-servers.yml
+#
 - hosts: exit-servers
+  gather_facts: True
+  become: True
   roles:
     - role: tunneldigger-broker
       tags: tunneldigger-broker
     - role: babeld
       tags: babeld
+    - role: cmprescott.dnsmasq
+      tags: dnsmasq
+    - role: mesh-nat
+      tags: mesh-nat

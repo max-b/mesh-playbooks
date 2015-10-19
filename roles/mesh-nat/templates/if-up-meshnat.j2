@@ -1,0 +1,5 @@
+#!/bin/sh
+
+iptables -t nat -D POSTROUTING -s {{ mesh_net }} ! -d {{ mesh_net }} -j MASQUERADE
+iptables -t nat -I POSTROUTING -s {{ mesh_net }} ! -d {{ mesh_net }} -j MASQUERADE
+

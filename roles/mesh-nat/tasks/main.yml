@@ -1,0 +1,8 @@
+---
+- name: Create mesh-nat if-up script
+  template: dest=/etc/network/if-up.d/mesh-nat            
+            src=if-up-meshnat.j2
+            force=yes
+            mode=0755
+  notify: reload network
+
