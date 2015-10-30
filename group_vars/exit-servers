@@ -5,7 +5,25 @@ tunneldigger_broker_port: 8942
 up_hook_script_path: "/opt/tunneldigger/broker/scripts/"
 up_hook_script_name: "tunnel-up-hook.sh"
 
-dnsmasq_dns_interfaces: [ "except-interface=eth0" ] 
+firewall_default_forward_policy: 'ACCEPT'
+
+# Leave open ssh
+firewall_open_tcp_ports: [ '22' ]
+# Leave open snmp and tunneldigger entry
+firewall_open_udp_ports: [ '161', '8942', '6696']
+firewall_use_fail2ban: True
+firewall_fail2ban_destemail: 'info@sudomesh.org'
+firewall_custom_rules:
+ - proto: 'tcp'
+   port: '53'
+   host: '100.64.0.0/10'
+   policy: 'allow'
+ - proto: 'udp'
+   port: '53'
+   host: '100.64.0.0/10'
+   policy: 'allow'
+
+dnsmasq_dns_interfaces: [ "except-interface=eth0", "listen-address={{ mesh_addr }},127.0.0.1" ] 
 dnsmasq_dns_domains: [ "domain=sudomesh.org" ] 
 dnsmasq_dns_hosts: 
  - "expand-hosts" 
@@ -13,9 +31,10 @@ dnsmasq_dns_hosts:
  - "host-record=monitor.sudomesh.org,100.64.0.10"
  #- "addn-hosts=/etc/hosts.sudomesh" # TODO: Fails if /etc/hosts.sudomesh doesn't exist! What a surprise!
  
-subnetwork_ipv4: "{{ mesh_net }}"
-subnetwork_ipv4_nat: True
-subnetwork_ipv4_nat_masquerade: True
+# For debops.subnetwork which is currently not being used in favor of mesh-nat
+# subnetwork_ipv4: "{{ mesh_net }}"
+# subnetwork_ipv4_nat: True
+# subnetwork_ipv4_nat_masquerade: True
 
 enable_babeld: true
 babel_interfaces: ["l2tp0"]
@@ -29,3 +48,7 @@ babel_filter_rules:
  - "redistribute local deny"
  - "in local deny"
  - "in deny"
+
+babel_additional_confs:
+ - "log-file /var/log/babeld.log"
+ - "pid-file /var/run/babeld.pid"

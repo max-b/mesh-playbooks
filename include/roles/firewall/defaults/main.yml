@@ -1,0 +1,37 @@
+---
+
+#
+# Default Policies
+#
+firewall_default_input_policy: "DROP"
+firewall_default_output_policy: "ACCEPT"
+firewall_default_forward_policy: "DROP"
+
+
+#
+# Common
+#
+firewall_whitelisted_hosts: []
+firewall_blacklisted_hosts: []
+
+#
+# UFW
+#
+firewall_open_tcp_ports: []
+firewall_open_udp_ports: []
+firewall_auto_open_ssh: true
+firewall_custom_rules: []
+firewall_logging: 'low'
+firewall_kernel_modules: []
+firewall_enable_ipv6: true
+firewall_reset: false
+
+#
+# Fail2ban
+#
+firewall_use_fail2ban: false
+firewall_fail2ban_bantime: '3600'
+firewall_fail2ban_maxretry: '4'
+firewall_fail2ban_destemail: 'root@localhost'
+firewall_fail2ban_jails: []
+

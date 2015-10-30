@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if=$3
+mtu=$4
+end_ip=$5
+end_port=$6
+local_port=$7
+
+ip link set "$if" down
+ip addr del {{ mesh_addr }}/{{ mesh_subnet }} dev "$if"
+babeld -x "$if"
+
+count=0
+max=5
+
+while [ $? -ne 0 ]; do
+  if [ $count -ge $max ]; then
+    exit 1
+  fi
+  sleep 2
+  ufw delete allow proto udp from "$end_ip/32" to any port "$local_port"
+done
+

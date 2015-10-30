@@ -57,7 +57,14 @@
             src=tunnel-up-hook.sh.j2
             force=yes
             mode=0755
-  tags: create-hook
+  tags: create-hooks
+
+- name: Create hook file
+  template: dest=/opt/tunneldigger/broker/scripts/tunnel-down-hook.sh
+            src=tunnel-down-hook.sh.j2
+            force=yes
+            mode=0755
+  tags: create-hooks
 
 - name: Create config file
   template: dest=/opt/tunneldigger/broker/l2tp_broker.cfg 

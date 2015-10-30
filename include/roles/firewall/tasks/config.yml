@@ -1,0 +1,29 @@
+---
+
+- name: LINEINFILE | Enable / Disable IPv6
+  lineinfile: dest=/etc/default/ufw regexp='^IPV6=' line="IPV6={{ 'yes' if firewall_enable_ipv6 else 'no' }}"
+  notify:
+    - ufw disable
+    - ufw enable
+
+- name: LINEINFILE | Set up input default policy
+  lineinfile: dest=/etc/default/ufw regexp='^DEFAULT_INPUT_POLICY=' line="DEFAULT_INPUT_POLICY=\"{{ firewall_default_input_policy }}\""
+  notify:
+    - ufw disable
+    - ufw enable
+
+- name: LINEINFILE | Set up output default policy
+  lineinfile: dest=/etc/default/ufw regexp='^DEFAULT_OUTPUT_POLICY=' line="DEFAULT_OUTPUT_POLICY=\"{{ firewall_default_output_policy }}\""
+  notify:
+    - ufw disable
+    - ufw enable
+
+- name: LINEINFILE | Set up forward default policy
+  lineinfile: dest=/etc/default/ufw regexp='^DEFAULT_FORWARD_POLICY=' line="DEFAULT_FORWARD_POLICY=\"{{ firewall_default_forward_policy }}\""
+  notify:
+    - ufw disable
+    - ufw enable
+
+
+- name: LINEINFILE | Manage modules
+  lineinfile: dest=/etc/default/ufw regexp='^IPT_MODULES=' line="IPT_MODULES=\"{{ firewall_kernel_modules | join(' ')}}\""

@@ -1,3 +1,6 @@
+{% for conf in babel_additional_confs %}
+{{ conf }}
+{% endfor %}
 {% for interface in babel_interfaces %}
 interface {{ interface }}
 {% endfor %}

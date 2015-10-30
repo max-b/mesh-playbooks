@@ -35,4 +35,9 @@
   notify:
     - restart babeld service
 
+- name: Restart babeld service
+  service: name=babeld
+           state=restarted
+  when: enable_babeld is not undefined and enable_babeld
+
 

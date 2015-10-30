@@ -98,6 +98,11 @@
    path: include/roles/
    version: maxb
 
+ - src: https://github.com/max-b/ansible-firewall
+   name: firewall
+   path: include/roles/
+   version: maxb
+
  - src: nicolai86.buildbot
    name: nicolai86.buildbot
    path: include/roles/

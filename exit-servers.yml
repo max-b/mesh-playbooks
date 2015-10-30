@@ -2,8 +2,9 @@
 #
 - hosts: exit-servers
   gather_facts: True
-  become: True
   roles:
+    - role: firewall
+      tags: firewall
     - role: tunneldigger-broker
       tags: tunneldigger-broker
     - role: babeld
