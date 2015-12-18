@@ -4,5 +4,5 @@
             src=if-up-meshnat.j2
             force=yes
             mode=0755
-  notify: reload network
+  notify: reload networking 
 
