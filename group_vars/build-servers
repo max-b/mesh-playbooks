@@ -1,5 +1,8 @@
 ---
 # file: group_vars/build-servers
+
+sudowrt_version: master
+
 nginx_default_index_html: |
   <html>
     <head>
@@ -15,12 +18,13 @@ nginx_default_index_html: |
 # templates: templates/etc/nginx/sites-available/*.conf.j2
 nginx_server_default:
   enabled: True
-  name: ['{{ansible_fqdn}}']
+  name: ['{{ ansible_fqdn }}']
   default_index: '{{ nginx_default_index_html }}'
   listen: ['80']
   location: 
     '/builds': 'autoindex on;'
 
+nginx_default_name: "{{ hostname_name }}.{{ hostname_domain }}"
 
 # nginx base path for website directories
 # It is exposed using Ansible local facts as 'ansible_local.nginx.www'
