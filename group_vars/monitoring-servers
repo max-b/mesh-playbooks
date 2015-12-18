@@ -4,9 +4,9 @@ tunneldigger_broker_ip: 104.236.181.226
 tunneldigger_broker_port: 8942
 tunnel_interface: l2tp1
 up_hook_script_path: /opt/tunneldigger/client/scripts/
-up_hook_script_name: up-hook.sh
+up_hook_script_name: "up-hook.sh"
 
-enable_babeld = true
+enable_babeld: true
 
 babel_interfaces: 
  - "{{ tunnel_interface }}"
