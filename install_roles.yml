@@ -99,7 +99,7 @@
    version: maxb
 
  - src: https://github.com/max-b/ansible-firewall
-   name: firewall
+   name: maxb.firewall
    path: include/roles/
    version: maxb
 
