@@ -48,7 +48,7 @@ REMEMBER THAT THESE CHANGES HAVE THE POSSIBILITY OF LOCKING YOU OUT!
 I was using librarian-ansible for a while, but I've since switched to ansible galaxy. 
 Galaxy roles are listed in `install_roles.yml`. 
 I've already just checked in all of the dependencies into this repo, but if you wanted to add a new role, you could
-append it to the `install_roles.yml` file and then run `ansible-galaxy -r install_roles.yml`. 
+append it to the `install_roles.yml` file and then run `ansible-galaxy install -r install_roles.yml`. 
 I assume that's also the upgrade process....
 
 
