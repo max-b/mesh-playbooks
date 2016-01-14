@@ -1,0 +1,40 @@
+---
+
+- name: Clone garden-gnome repo
+  git: repo=https://github.com/sudomesh/garden-gnome.git
+       force=yes
+       dest=/opt/garden-gnome
+
+- name: Install npm packages 
+  npm: path=/opt/garden-gnome state=present
+
+- name: Copy settings 
+  command: cp /opt/garden-gnome/settings.js.example /opt/garden-gnome/settings.js 
+
+- name: Clone splash page
+  git: repo=https://github.com/sudomesh/captive-portal-splash.git
+       force=yes
+       dest=/opt/captive-portal-splash
+
+- name: Copy splash page 
+  command: cp /opt/captive-portal-splash/splash.html /opt/garden-gnome/www/splash.html 
+
+- name: Create garden-gnome service file
+  template: dest=/lib/systemd/system/garden-gnome.service
+            src=garden-gnome.service.j2
+            force=yes
+            mode=0644
+  tags: create-systemd
+
+- name: Enable garden-gnome service
+  service: name=garden-gnome
+           enabled=yes
+  when: enable_garden_gnome is not undefined and enable_garden_gnome
+
+- name: Start garden-gnome service
+  service: name=garden-gnome
+           state=restarted
+  when: enable_garden_gnome is not undefined and enable_garden_gnome
+
+
+

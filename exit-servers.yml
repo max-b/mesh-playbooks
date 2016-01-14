@@ -3,7 +3,7 @@
 - hosts: exit-servers
   gather_facts: True
   roles:
-    - role: firewall
+    - role: maxb.firewall
       tags: firewall
     - role: tunneldigger-broker
       tags: tunneldigger-broker
@@ -13,3 +13,5 @@
       tags: dnsmasq
     - role: mesh-nat
       tags: mesh-nat
+    - role: garden-gnome
+      tags: garden-gnome

@@ -1,0 +1,12 @@
+[Unit]
+Description=Garden-Gnome Daemon
+After=syslog.target
+
+[Service]
+ExecStart=/usr/bin/node /opt/garden-gnome/index.js
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

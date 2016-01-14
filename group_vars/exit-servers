@@ -5,23 +5,47 @@ tunneldigger_broker_port: 8942
 up_hook_script_path: "/opt/tunneldigger/broker/scripts/"
 up_hook_script_name: "tunnel-up-hook.sh"
 
-firewall_default_forward_policy: 'ACCEPT'
+enable_garden_gnome: True
 
+firewall_default_forward_policy: 'ACCEPT'
+firewall_reset: True
+#firewall_enable_ipv6: False 
 # Leave open ssh
-firewall_open_tcp_ports: [ '22' ]
+firewall_open_tcp_ports: [ '22', '80', '5080' ]
 # Leave open snmp and tunneldigger entry
 firewall_open_udp_ports: [ '161', '8942', '6696']
 firewall_use_fail2ban: True
 firewall_fail2ban_destemail: 'info@sudomesh.org'
-firewall_custom_rules:
- - proto: 'tcp'
-   port: '53'
-   host: '100.64.0.0/10'
-   policy: 'allow'
- - proto: 'udp'
-   port: '53'
-   host: '100.64.0.0/10'
-   policy: 'allow'
+firewall_whitelisted_hosts: ['100.64.0.0/10']
+# firewall_custom_rules:
+#  - proto: 'tcp'
+#    port: '53'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+#  - proto: 'udp'
+#    port: '53'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+#  - proto: 'tcp'
+#    port: '80'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+#  - proto: 'tcp'
+#    port: '5080'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+#  - proto: 'tcp'
+#    port: '5081'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+# - proto: 'tcp'
+#    port: 'any'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
+#  - proto: 'udp'
+#    port: 'any'
+#    host: '100.64.0.0/10'
+#    policy: 'allow'
 
 dnsmasq_dns_interfaces: [ "except-interface=eth0", "listen-address={{ mesh_addr }},127.0.0.1" ] 
 dnsmasq_dns_domains: [ "domain=sudomesh.org" ] 
@@ -31,6 +55,11 @@ dnsmasq_dns_hosts:
  - "host-record=monitor.sudomesh.org,100.64.0.10"
  #- "addn-hosts=/etc/hosts.sudomesh" # TODO: Fails if /etc/hosts.sudomesh doesn't exist! What a surprise!
  
+dnsmasq_path_conf_dir: "/etc/dnsmasq.d"
+dnsmasq_confs:
+  - "dhcp-hostsfile={{ dnsmasq_path_dhcp_hosts }}"
+  - "dhcp-optsfile={{ dnsmasq_path_dhcp_opts }}"
+  - "conf-dir={{ dnsmasq_path_conf_dir }}"
 # For debops.subnetwork which is currently not being used in favor of mesh-nat
 # subnetwork_ipv4: "{{ mesh_net }}"
 # subnetwork_ipv4_nat: True
